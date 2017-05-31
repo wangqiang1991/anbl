@@ -1,0 +1,111 @@
+body{
+	font-family: "Microsoft YaHei";
+	font-size: 0.24rem;
+	color: white;
+	background: #333;
+}
+a{
+	text-decoration: none;
+	color: white;
+}
+li{
+	list-style: none;
+}
+header{
+	width: 100%;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	overflow: hidden;
+}
+header a{
+	display: inline-block;
+	width: auto;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	padding-left: 0.3rem;
+	font-size: 0.3rem;
+	float: left;
+}
+header a:nth-child(1) img{
+	width: 0.25rem;
+	height: 0.43rem;
+	margin-right: 0.2rem;
+}
+header p{
+	width: 4.2rem;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	text-align: center;
+	font-size: 0.3rem;
+	float: left;
+}
+.movie{
+	background: black;
+	overflow: hidden;
+	width: 100%;
+	height: auto;
+}
+.movie img{
+	width: 100%;
+	height: 3.4rem;
+	margin-bottom: 0.3rem;
+}
+.movie p{
+	font-size: 0.26rem;
+	margin-bottom: 0.2rem;
+	color: #ccc;
+	text-indent: 0.3rem;
+}
+.movie  span{
+	color: white;
+}
+.div{
+	width: 100%;
+	height: auto;
+	padding-bottom: 0.32rem;
+	background: #1f1f1f;
+	overflow: hidden;
+	margin-top: 0.35rem;
+}
+.div h3{
+	margin-top: 0.28rem;
+	padding-left: 0.3rem;	
+	color: white;
+	font-size: 0.3rem;
+}
+.div p{
+	font-size: 0.24rem;
+	color: #acacac;
+	margin-top: 0.3rem;
+	padding-left: 0.3rem;
+}
+footer{
+	position: fixed;
+	width: 100%;
+	height: 1rem;
+	bottom: 0;
+	left: 0;
+	background: black;
+	line-height: 1rem;
+	border-top: 1px solid #666;
+}
+footer p{
+	width: 4.7rem;
+	height: 100%;
+	color: white;
+	float: left;
+	padding-left: 0.3rem;
+	font-size: 0.3rem;
+}
+footer p span{
+	color: #e50909;
+}
+footer a{
+	display: block;
+	width: 2.5rem;
+	float: left;
+	height: 100%;
+	text-align: center;
+	font-size: 0.3rem;
+	background: #e50909;
+}

@@ -1,0 +1,233 @@
+body{
+	font-family: "Microsoft YaHei";
+	font-size: 0.24rem;
+	color: white;
+	background: #333;
+}
+a{
+	text-decoration: none;
+	color: white;
+}
+li{
+	list-style: none;
+}
+header{
+	width: 100%;
+	height: 0.9rem;
+	line-height: 0.9rem;
+}
+header a img{
+	width: 0.25rem;
+	height: 0.43rem;
+	margin-right: 0.2rem;
+}
+header a{
+	display: inline-block;
+	width: 1.2rem;
+	padding-left: 0.3rem;
+	font-size: 0.3rem;
+	float: left;
+}
+header p{
+	width: 4.5rem;
+	height: 100%;
+	font-size: 0.3rem;
+	text-align: center;
+	float: left;
+}
+.detail_img{
+	width: 100%;
+	height: 5.2rem;
+}
+.detail_img>img{
+	width: 100%;
+	height: 100%;
+}
+.mubiao{
+	width: 100%;
+	height: 1.5rem;
+	background: black;
+	overflow: hidden;
+}
+.mubiao>p:nth-child(1){
+	font-size: 0.24rem;
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
+	padding-left: 0.2rem;
+}
+.money{
+	padding-left: 0.2rem;
+	font-size: 0.4rem;
+	color: #e50909;
+}
+.jinxing{
+	float: right;
+	font-size: 0.3rem;
+	margin-right: 0.26rem;
+}
+.renshu{
+	width: 100%;
+	height: 1.2rem;
+	background: #000;
+	overflow: hidden;
+	margin-top: 0.3rem;
+	margin-bottom: 0.2rem;
+}
+.renshu li{
+	float: left;
+	height: 0.8rem;
+	width: 2.5rem;
+	border-right: 1px solid white;
+	margin-top: 0.2rem; 
+	text-align: center;
+}
+.renshu li:nth-child(2){
+	border: none;
+}
+.renshu li p{
+	margin-bottom: 0.15rem;
+}
+.renshu li span{
+	color: #e50909;
+	font-size: 0.3rem;
+}
+.movie{
+	margin-top: 0.3rem;
+	margin-bottom: 0.3rem;
+	color: #1f1f1f;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	background: #1f1f1f;
+}
+.movie h3{
+	font-size: 0.3rem;
+	color: white;
+	margin-top: 0.3rem;
+	margin-bottom: 0.2rem;
+	padding-left: 0.2rem;
+}
+.movie p{
+	padding-left: 0.2rem;
+	font-size: 0.24rem;
+	color: #ccc;
+	margin-bottom: 0.3rem;
+}
+.now_suport{
+	display: block;
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	font-size: 0.3rem;
+	background: #e50909;
+	color: white;
+	text-align: center;
+	position: fixed;
+	left: 0; bottom: 0;
+}
+.now_suportone{
+	display: block;
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	font-size: 0.3rem;
+	background: #333;
+	color: white;
+	text-align: center;
+	position: fixed;
+	left: 0; bottom: 0;
+}
+.bg{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,.74);
+}
+#suport_div{
+	width: 6.7rem;
+	height: 6.3rem;
+	background: #333;
+	position: absolute;
+	top: 1.9rem;
+	left: 0.4rem;
+	z-index: 5;
+}
+#suport_div>p{
+	font-size: 0.26rem;
+	color: #999;
+	padding-left: 0.5rem;
+	padding-top: 0.3rem;
+	padding-bottom: 0.2rem;
+}
+#suport_div>div{
+	width: 4.5rem;
+	height: auto;
+	margin: auto;
+}
+#suport_div>div label{
+	font-size: 0.26rem;
+	margin-right: 0.3rem;
+	margin-top: 0.2rem;
+}
+#suport_div>div input{
+	margin-left: 0.2rem;
+}
+#suport_div #apply{
+	width: 100%;
+	margin-top: 0.5rem;
+	padding-top: 0.4rem;
+	border-top: 1px solid #999;
+	color: #d8a508;
+}
+#suport_div #apply a{
+	color: #d8a508;
+}
+#suport_div #apply input{
+	margin-left: 0.5rem;
+}
+#suport_div #suport{
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	font-size: 0.3rem;
+	text-align: center;
+	background: #e50909;
+	position: absolute;
+	left: 0; bottom: 0;
+	padding: 0;
+	color: white;
+}
+.close_model{
+	width: 20px;
+	height: 20px;
+	display: block;
+	position: absolute;
+	top: 0.3rem;
+	right: 0.3rem;
+}
+.close_model:before{
+	position: absolute;
+    top: 10px;
+    left: 0;
+    display: block;
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transform: rotateZ(45deg);
+}
+.close_model:after{
+	position: absolute;
+    top: 10px;
+    left: 0;
+    display: block;
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transform: rotateZ(-45deg);
+}

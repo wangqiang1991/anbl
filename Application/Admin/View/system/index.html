@@ -1,0 +1,170 @@
+<extend name="public:tpl" />
+<block name="main">
+    <!-- page heading start-->
+    <div class="page-heading">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:U('admin/index/index')}">后台首页</a>
+            </li>
+            <li class="active"> 系统设置</li>
+        </ul>
+    </div>
+    <!-- page heading end-->
+
+    <!--body wrapper start-->
+    <section class="wrapper">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        系统管理
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" method="post"  id="formSystem">
+
+                            <div class="form-group">
+                                <label>网站标题</label>
+                                <input type="text" class="form-control" name="web_title" value="{$info.web_title}">
+                            </div>
+                            <div class="form-group">
+                                <label>网站关键字</label>
+                                <input type="text" class="form-control" name="web_keywords"
+                                       value="{$info.web_keywords}">
+                            </div>
+                            <div class="form-group">
+                                <label>网站描述</label>
+                                <textarea type="text" class="form-control" name="web_description">{$info.web_description}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>公司名称</label>
+                                <input type="text" class="form-control" name="company_name"
+                                       value="{$info.company_name}">
+                            </div>
+                            <div class="form-group">
+                                <label>网站后台URL地址</label>
+                                <input type="text" class="form-control" name="web_url" value="{$info.web_url}">
+                            </div>
+                            <div class="form-group">
+                                <label>网站前台URL地址</label>
+                                <input type="text" class="form-control" name="wap_url" value="{$info.wap_url}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>短信云片App_key</label>
+                                <input type="text" class="form-control" name="phone_api_app_key" placeholder="APIKEY"
+                                       value="{$info.phone_api_app_key}">
+                            </div>
+                            <div class="form-group">
+                                <label>验证码模板（请按照您在云片中的模板来写）</label>
+                                <textarea type="text" class="form-control" name="verify_code_tpl" placeholder="验证码模板">{$info.verify_code_tpl}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>邮箱发件服务器</label>
+                                <input type="text" class="form-control" name="send_mail_server"
+                                       value="{$info.send_mail_server}">
+                            </div>
+                            <div class="form-group">
+                                <label>邮箱发件账号</label>
+                                <input type="text" class="form-control" name="send_mail_user"
+                                       value="{$info.send_mail_user}">
+                            </div>
+                            <div class="form-group">
+                                <label>邮箱发件密码</label>
+                                <input type="password" class="form-control" name="send_mail_password"
+                                       placeholder="不修改密码请留空">
+                            </div>
+                            <div class="form-group">
+                                <label>每页显示条数</label>
+                                <input type="text" class="form-control" name="show_page_size" value="{$info.show_page_size}">
+                            </div>
+                            <div class="form-group" style="clear: both">
+                                <label>制片人新增业绩比例设置</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="number" name="zrate" class="form-control" value="{$info.zrate}">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="clear: both">
+                                <label>出品人新增业绩比例设置</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="number" name="crate" class="form-control" value="{$info.crate}">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>提现协议</label>
+                                <textarea id="container"  name="tixian" cols="200" rows="10">{$info.tixian}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>注册协议</label>
+                                <textarea id="container2"  name="zhuce" cols="200" rows="10">{$info.zhuce}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>充值协议</label>
+                                <textarea id="container1"  name="chonzhi" cols="200" rows="10">{$info.chonzhi}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="id" value="1">
+                            </div>
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="js">
+    <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/ueditor/ueditor.config.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/ueditor/ueditor.all.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var ue1 = UE.getEditor('container', {
+            toolbars: [
+                ['fullscreen', 'source', 'undo', 'redo', 'bold','indent','snapscreen', 'italic', 'underline', 'strikethrough','formatmatch','fontfamily',
+                    'fontsize', 'paragraph', 'simpleupload', 'insertimage','justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'forecolor',
+                    'backcolor', 'insertorderedlist', 'insertunorderedlist','imagecenter', 'wordimage', 'lineheight'
+                ]
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true
+        });
+        var ue1 = UE.getEditor('container1', {
+            toolbars: [
+                ['fullscreen', 'source', 'undo', 'redo', 'bold','indent','snapscreen', 'italic', 'underline', 'strikethrough','formatmatch','fontfamily',
+                    'fontsize', 'paragraph', 'simpleupload', 'insertimage','justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'forecolor',
+                    'backcolor', 'insertorderedlist', 'insertunorderedlist','imagecenter', 'wordimage', 'lineheight'
+                ]
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true
+        });
+        var ue1 = UE.getEditor('container2', {
+            toolbars: [
+                ['fullscreen', 'source', 'undo', 'redo', 'bold','indent','snapscreen', 'italic', 'underline', 'strikethrough','formatmatch','fontfamily',
+                    'fontsize', 'paragraph', 'simpleupload', 'insertimage','justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'forecolor',
+                    'backcolor', 'insertorderedlist', 'insertunorderedlist','imagecenter', 'wordimage', 'lineheight'
+                ]
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true
+        });
+    </script>
+    <js href="__PUBLIC__/layer/layer.js"/>
+    <script>
+        $('#formSystem').submit(function () {
+            var _data = $(this).serialize();
+            $.post("{:U('admin/system/index')}", _data, function (data) {
+                layer.alert(data.msg);
+            });
+            return false;
+        });
+    </script>
+</block>

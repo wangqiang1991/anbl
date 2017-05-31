@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/apply/apply.css">
+	<title>提现</title>
+</head>
+<body>
+	<header>
+		<a href="{:U('Account/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">我的账户</a>
+		<p>申请提现</p>
+	</header>
+	<div class="content">
+		<p>请选择提现的类型:	</p>
+		<p id="type"><input type="radio" id="type1" name="type" value="1"><label for="type1">提现余额</label><input name="type" type="radio" id="type2" value="2"><label for="type2">提现收益</label><input name="type" type="radio" id="type3" value="3"><label for="type3">提现佣金</label></p>
+		<input type="text" placeholder="提现数目须为100的倍数" name="number">
+		<p>您当前可提数目为<span>{$user['money']}</span>阿纳豆</p>
+	</div>
+	<p class="remind">提醒：待管理员在3个工作日内审核通过,请耐心等待</p>
+	<div class="apply">提交申请</div>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
+	<script src='__PUBLIC__/wang/apply/apply.js'></script>
+<script>
+		var top=$('body').height()-$('.apply').height();
+		$('.apply').css({
+			top:top
+		})
+</script>
+</body>
+</html>

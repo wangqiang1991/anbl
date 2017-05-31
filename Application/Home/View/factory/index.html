@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/common.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/factory/demo.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/factory/style5.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/factory/star_factory.css">
+	<link href="__CSS__/layui.css" rel="stylesheet">
+	<title>星工场</title>
+</head>
+<body>
+	<header>
+		<a class="logo" href="/home/index/index.html"><img src="/Public/wang/img/logo.png"></a>
+		<div class="star_factory">
+			
+		</div>
+		    <div class="menu_logo">
+				<div class="burger2 menu">
+				      <div class="icon"></div>
+				</div>
+			</div>
+			<div class="menu_content">
+				<p>A</p>
+				<p>R</p>
+				<p>B</p>
+				<div class="hide_menu">
+					<ul class="login_reg">
+						<if condition="$userInfo['username'] eq ''">
+							<li ><a href="{:U('Home/Register/index')}">注册</a></li>
+							<li ><a id="login" href="{:U('Home/Login/index')}">登录 |</a></li>
+							<else/>
+							<li class="login_out"><a href="{:U('Home/Login/logout')}">退出登录</a></li>
+							<li class="user_img" style="color: white">{:telephoneNumber($userInfo['username'])}</li>
+						</if>
+						<li class='search_li' style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
+					</ul>
+					<p><a href="{:U('home/index/index')}">首页</a></p>
+					<p style="margin-bottom: 22px;"><a href="">公司介绍</a></p>
+					<div><span></span><a href="{:U('home/company/about')}">关于我们</a></div>
+					<div style="margin-bottom:43px;"><span></span><a href="{:U('home/company/index')}">公司文化</a></div>
+					<p><a href="{:U('home/market/index')}">电影超市</a></p>
+					<p><a href="{:U('home/factory/index')}">星工场</a></p>
+					<p><a href="{:U('Home/Personal/index')}">个人中心</a></p>
+					<div class="declar">Copyright 2017 阿纳巴里国际影业</div>
+				</div>
+			</div>
+	</header>
+	<div class="body">
+	    <div class="choice_role">
+			 <section class="main">
+
+				<div id="sb-container3" class="sb-container">
+				<volist name="starInfo" id="info">
+					{~$o =60}
+					{~$p +=$o+1}
+					<div id="{$p}">
+						<span class="sb-icon icon-cog"></span>
+						<h4><a >{$info.name}</a></h4>
+					</div>
+				</volist>
+					<div class="last_title">
+						<h4><span>araberri</span></h4>
+						<h5><span> &hearts; </span><img src="__PUBLIC__/wang/factory/img/WE_MOVIES.png" alt=""></h5>
+					</div>
+				</div><!-- sb-container -->
+				<div class='page'>{$pages}</div>
+			</section>
+			<div class="star_content" id="star_content3">
+				<volist name="starInfo" id="info">
+					{~$x =60}
+					{~$z +=$x+1}
+				<div class="{$z}">
+					<div class="toupiao1"><p class="toupiao">已有<span>{$info.vote_number}</span>人投票</p></div>
+					<div class="role_img"><img src="{$info.image_url}" alt=""></div>
+					<div class="name">
+						<p>{$info.name}</p>
+					</div>
+					<div class="works">
+						<p>申请参演作品： <span>{$info.project_name}</span></p>
+						<p>申请参演角色：<span>{$info.role_name}</span></p>
+					</div>
+					<div class='myself'>
+						<p>身高：{$info.height}CM</p>
+						<p>出身年月：{$info.birthday}</p>
+						<p>自我评价：{$info.skill}</p>
+						<p>我的特长：{$info.expirence}</p>
+					</div>
+					<div style="margin-top: 15px;" class="vote_btn">投票</div>
+					<div class='warn' style="display: none;" ><p>投票需要消耗1个阿纳豆</p><input _id="{$info['id']}" _type="4" name="sure" type="button" value="确定"><input name="cancel" type="button" value="取消">	 </div>
+				</div>
+				</volist>
+				
+			</div>
+		</div>
+		<div class="nice_actor" style="display: none;">
+			 <section class="main">
+
+				<div id="sb-container" class="sb-container">
+				<volist name="performerInfos" id="info">
+					{~$i =1}
+					{~$j +=$i+1}
+					<div id="{$j}">
+						<span class="sb-icon icon-cog"></span>
+						<h4><a >{$info.name}</a></h4>
+					</div>
+				</volist>
+					<div class="last_title">
+						<h4><span>araberri</span></h4>
+						<h5><span> &hearts; </span><img src="__PUBLIC__/wang/factory/img/WE_MOVIES.png" alt=""></h5>
+					</div>
+					
+				</div><!-- sb-container -->
+
+			</section>
+			<div class="star_content" id="star_content">
+				<volist name="performerInfos" id="info">
+					{~$m =1}
+					{~$n +=$m+1}
+				<div class="{$n}">
+					<div class="toupiao1"><p class="toupiao"><span>{$info.fans_number}</span>粉丝</p></div>
+					<div class="role_img"><img src="{$info.image_url}" alt=""></div>
+					<div class="name">
+						<p>{$info.name}</p>
+						<span>{$info.type}</span>
+					</div>
+					<div class="works">
+						<p>代表作品</p>
+						<span>{$info.works}</span>
+					</div>
+					<div class="vote_btn">投票</div>
+					<div class='warn' style="display: none;" ><p>投票需要消耗1个阿纳豆</p><input _id="{$info['id']}" _type="1" name="sure" type="button" value="确定"><input name="cancel" type="button" value="取消">	 </div>
+
+				</div>
+				</volist>
+				
+			</div>
+		</div>
+		<div class="nice_director" style="display: none;" >
+			 <section class="main">
+			
+				<div id="sb-container1" class="sb-container">
+				<volist name="directorInfos" id="info">
+					{~$x =15}
+					{~$y +=$x+1}
+					<div id="{$y}">
+						<span class="sb-icon icon-cog"></span>
+						<h4><a >{$info.name}</a></h4>
+					</div>
+				</volist>
+					<div class="last_title">
+						<h4><span>araberri</span></h4>
+						<h5><span> &hearts; </span><img src="__PUBLIC__/wang/factory/img/WE_MOVIES.png" alt=""></h5>
+					</div>
+					
+				</div><!-- sb-container -->
+
+			</section>
+			<div class="star_content" id="star_content1">
+				<volist name="directorInfos" id="info">
+					{~$h =15}
+					{~$k +=$h+1}
+				<div class="{$k}">
+					<div class="toupiao1"><p class="toupiao"><span>13546</span>粉丝</p></div>
+					<div class="role_img"><img src="{$info.image_url}" alt=""></div>
+					<div class="name">
+						<p>{$info.name}</p>
+						<span>{$info.address}</span>
+					</div>
+					<div class="works">
+						<p>代表作品</p>
+						<span>{$info.intro}</span>
+					</div>
+					<div class="vote_btn">投票</div>
+					<div class='warn' style="display: none;" ><p>投票需要消耗1个阿纳豆</p><input _id="{$info['id']}" _type="2" name="sure" type="button" value="确定"><input name="cancel" type="button" value="取消">	 </div>
+				</div>
+				</volist>
+				
+			</div>
+		</div> 
+		<div class="nice_work" style="display: none;">
+			 <section class="main">
+			
+				<div id="sb-container2" class="sb-container">
+					<volist name="worksInfos" id="info">
+						{~$b =30}
+						{~$a +=$b+1}
+					<div id="{$a}">
+						<span class="sb-icon icon-cog"></span>
+						<h4><a >{$info.name}</a></h4>
+					</div>
+					</volist>
+					<div class="last_title">
+						<h4><span>araberri</span></h4>
+						<h5><span> &hearts; </span><img src="__PUBLIC__/wang/factory/img/WE_MOVIES.png" alt=""></h5>
+					</div>
+
+				</div><!-- sb-container -->
+
+			</section>
+			<div class="star_content" id="star_content2">
+				<volist name="worksInfos" id="info">
+					{~$c =30}
+					{~$d +=$c+1}
+				<div class="{$d}">
+					<div class="toupiao1"><p class="toupiao"><span>{$info.fans_number}</span>粉丝</p></div>
+					<div class="role_img"><img src="{$info.img_url}" alt=""></div>
+					<div class="name">
+						<p>{$info.name}</p>
+						<span>{$info.type}</span>
+					</div>
+					<div class="works">
+						<p>故事梗概</p>
+						<span>{$info.intro}</span>
+					</div>
+					<div class="vote_btn">投票</div>
+					<div class='warn' style="display: none;" ><p>投票需要消耗1个阿纳豆</p><input name="sure" type="button" _id="{$info['id']}" _type="3" value="确定"><input name="cancel" type="button" value="取消">	 </div>
+
+				</div>
+				</volist>
+				
+			</div>
+		</div>  
+			<div class="classify">
+				<p class="choice">评选角色</p>
+				<p >优秀演员</p>
+				<p>优秀导演</p>
+				<p>优秀作品</p>
+			</div>
+	</div>
+	    <script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
+		<script src='__PUBLIC__/wang/common_js/common.js'></script>
+		<script src='__PUBLIC__/wang/factory/modernizr.custom.79639.js'></script>
+		<script src='__PUBLIC__/wang/factory/jquery.swatchbook.js'></script>
+		<script src='__PUBLIC__/wang/factory/star_factory.js'></script>
+	<!--layer.js-->
+	    <script src="__PUBLIC__/layer/layer.js"></script>
+		<script>	
+			$(function() {
+			
+				$( '#sb-container3' ).swatchbook( {
+					openAt : 0
+				} );
+			
+			});
+			$('.vote_btn').click(function(){
+				//console.log(1)
+				$(this).next().show();
+			})
+			$('.warn>input[name=cancel]').click(function(){
+				$(this).parent().hide();
+			})
+
+			$(".warn>input[name=sure]").on('click',function(){
+				var _id = $(this).attr('_id');
+				var _type = $(this).attr('_type');
+				var _data = {
+					id : _id,
+					type : _type
+				};
+				$.post("{:U('home/factory/vote')}",_data,function (data) {
+					if (data.status == 0) {
+						layer.confirm('您还没有登录', {
+							btn: ['登录','取消'] //按钮
+						}, function(){
+							window.location.href = "{:U('Home/Login/index')}"
+						}, function(){
+						});
+					} else {
+						layer.msg(data.msg,{
+							time:2
+						},function(){
+							location.reload();
+						});
+						$('.vote_btn').next().hide();
+					}
+				});
+			})
+
+		</script>
+</body>
+</html>

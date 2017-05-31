@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/name/name.css">
+	<title>实名认证</title>
+</head>
+<body>
+	<header>
+		<a href="{:U('Account/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">我的账户</a>
+		<p>实名认证</p>
+	</header>
+	<div class="name">
+		<div class="realname"><label>姓名</label><input type="text" placeholder="请填写真实姓名" name="realname"></div>
+		<div class="realid"><label>身份证号</label><input type="text" placeholder="请填写真实身份证号码" name="id_card"></div>
+		<div class="bank"><label>选择银行卡</label><select value='' id="bind_bank">
+										<option value="中国银行"   <if condition="$userInfo['bank_name'] eq '中国银行'">selected</if>>中国银行</option>
+										<option value="工商银行"  <if condition="$userInfo['bank_name'] eq '工商银行'">selected</if>>工商银行</option>
+										<option value="农业银行"  <if condition="$userInfo['bank_name'] eq '农业银行'">selected</if>>农业银行</option>
+										<option value="建设银行"  <if condition="$userInfo['bank_name'] eq '建设银行'">selected</if>>建设银行</option>
+										<option value="中国邮政储蓄银行"  <if condition="$userInfo['bank_name'] eq '中国邮政储蓄银行'">selected</if>>中国邮政储蓄银行</option>
+										<option value="招商银行"  <if condition="$userInfo['bank_name'] eq '招商银行'">selected</if>>招商银行</option></select></div>
+		<div class="bank_card"><label>开户名</label><input type="text" placeholder="请填写开户名" name="bank_card_name" value=""></div>
+		<div class="bank_card"><label>银行卡号</label><input type="text" placeholder="请填写银行卡号" name="bank_card" value=""></div>
+		<div class="bank_card1"><label>开户支行</label><input type="text" placeholder="请填写开户支行" name="bank_card1" value=""></div>
+	</div>
+	<footer id="tijiao">
+		提交
+	</footer>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/name/name.js'></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
+<script>
+	var top=$('body').height()-$('#tijiao').height();
+	$('#tijiao').css({
+		top:top
+	})
+</script>
+</body>
+</html>

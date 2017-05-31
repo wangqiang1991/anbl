@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/home/home.css">
+	<title>首页-阿纳巴里</title>
+</head>
+<body>
+	<header>
+		<p id="nav"><img src="__PUBLIC__/wang/home/nav.png"></p>
+		<p><img src="__PUBLIC__/wang/common_img/logo.png"></p>
+		<a href="{:U('Index/share')}">分享<img src="__PUBLIC__/wang/home/share.png"></a>
+	</header>
+	<div class="content">
+		<volist name="projectInfo" id="info">
+		<div>
+			<div class="left">
+				<a href="{:U('index/detail',['id'=>$info['id']])}">
+				<img src="{$info.image_url}" alt="">
+				<div class="star">
+				<span>评星:</span>
+					<for start="0" end="$info['star_num']"><i></i></for>
+				</div>
+				</a>
+			</div>
+			<div class="right">
+				<p>{$info['name']}</p>
+				<p>阿纳豆: <span> {:floor($info['target_amount'])}</span></p>
+				<p>剩余天数: <span> {:dataNum(time(),$info['end_time'])}</span></p>
+				<p>导演:{$info['director']}</p>
+				<p>主演:{$info['star']}</p>
+			</div>
+		</div>
+		</volist>
+	</div>
+	<div class="menu" style="display: none;">
+		<div class="body">
+			<a href="{:U('Index/index')}"><img style="width: 0.4rem;height: 0.4rem;" src="__PUBLIC__/wang/common_img/home.png" alt="">首页</a>
+			<a href="{:U('Account/index')}"><img style="width: 0.36rem;height: 0.32rem;" src="__PUBLIC__/wang/common_img/project.png" alt="">我的账户</a>
+			<a href="{:U('Index/userProject')}"><img style="width: 0.38rem;height: 0.30rem;" src="__PUBLIC__/wang/common_img/zhanghu.png" alt="">我的项目</a>
+			<a href="{:U('Account/cashIndex')}"><img style="width: 0.45rem;height: 0.45rem;" src="__PUBLIC__/wang/common_img/cz.png" alt="">充值</a>
+			<a href="{:U('Account/upCredence')}"><img style="width: 0.33rem;height: 0.33rem;" src="__PUBLIC__/wang/common_img/apply.png" alt="">上传凭证</a>
+			<a href="{:U('Account/rechargeIndex')}"><img style="width: 0.45rem;height: 0.45rem;" src="__PUBLIC__/wang/common_img/qb.png" alt="">提现</a>
+			<a href="{:U('Star/index')}"><img style="width: 0.26rem;height: 0.42rem;" src="__PUBLIC__/wang/common_img/actor.png" alt="">我要当演员</a>	
+			<div class="body_bottom">
+				<div><if condition="$isLogin eq 1"><span><if condition="$userInfo['is_true'] eq 1">{$userInfo['realname']}<else/>{:telephoneNumber($userInfo['username'])}</if></span><else /><a href="{:U('login/index')}">登录</a></if></div>
+				<div><if condition="$isLogin eq 1"><a href="{:U('Login/logout')}">退出账户</a><else /><a href="{:U('login/index',['xt'=>1])}">注册</a></if></div>
+			</div>
+		</div>
+	</div>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/home/home.js'></script>
+</body>
+</html>

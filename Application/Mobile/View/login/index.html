@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/login_reg/login_reg.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/layerMobile/need/layer.css">
+	<title>账户</title>
+</head>
+<body>
+	<div class="bg">
+		<a><img src="__PUBLIC__/wang/common_img/logo.png" alt=""></a>
+	</div>
+	<div class="loginorreg">
+		<if condition="!empty($parent_id)">
+			<p class="choice">登录<i></i></p>
+			<p >注册<i></i></p>
+			<else />
+			<p class="choice" style="width: 100%">登录<i></i></p>
+		</if>
+	</div>
+	<div class="login" >
+		<div><i class="userimg"></i><input type="text" placeholder="用户名" name="username"></div>
+		<div><i class="passwordimg"></i><input type="password" placeholder="密码" name="password"></div>
+		<p id="login">登录</p>
+	</div>
+	<input type="hidden" name="parent_id" value="{$parent_id['id']}">
+	<div class="reg" style="display: none;">
+		<div><i class="phone"></i><input class="phoneinput" type="text" placeholder='输入手机号码' name="phone"></div>
+		<div class="div2"><i class="duanxing"></i><input type="text" placeholder="输入短信验证码" name="captcha"><span class="song">发送验证码</span>
+		<span class="mengban" style="display: none;"></span></div>
+		<div><i class="mima"></i><input type="password" placeholder="请输入密码" name="passWord"></div>
+		<div><i class="queren"></i><input type="password" placeholder="请确认密码" name="rePassword"></div>
+		<p id="reg">注册</p>
+	</div>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/login_reg/login_reg.js'></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
+</body>
+</html>

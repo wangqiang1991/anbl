@@ -1,0 +1,81 @@
+<link href="__CSS__/style.css" rel="stylesheet">
+<link href="__CSS__/style-responsive.css" rel="stylesheet">
+<block name="css">
+    <style>
+        .loadfile {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border: 1px dashed silver;
+            cursor: pointer;
+            color: #838383;
+            font-size: 44px;
+            line-height: calc(100px - 9px);
+            text-align: center;
+        }
+        .imgInput {
+            float: left;
+            margin-right: 20px;
+            border: 1px dashed silver;
+        }
+
+        .imgInput:hover {
+            cursor: pointer;
+            border: 3px dashed silver;
+        }
+    </style>
+</block>
+<body style="background-color: white">
+<div class="panel-body">
+    <form class="form-horizontal adminex-form" method="post" action="{:U('Home/Personal/filmSave')}" id="form">
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">电影名称</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" value="{$film.name}" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">封面图</label>
+            <div class="col-sm-10">
+                <img src="{$film['image_url']}" style="width: 400px;height: 400px" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">电影简介</label>
+            <div class="col-sm-10">
+                <textarea rows="6" class="form-control" readonly >{$film.intro}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">角色列表</label>
+            <div class="col-sm-10" id="images">
+                <volist name="role" id="rol">
+                    <lable><input type="radio"  value="{$rol['id']}" name="roleId">{$rol['name']}</lable>&nbsp;&nbsp;
+                </volist>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10" style="float: right;">
+                <input type="hidden" name="filmId" value="{$film['id']}">
+                <input type="submit" class="btn btn-success" value="申请该角色" id="save">
+            </div>
+        </div>
+    </form>
+</div>
+<block name="js">
+    <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/code/js/jquery.html5upload.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+
+            $('#save').on('click', function(){
+                var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+                parent.layer.close(index); //执行关闭
+            });
+
+        });
+    </script>
+</block>
+</body>

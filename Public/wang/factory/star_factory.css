@@ -1,0 +1,241 @@
+html body{
+	font-family: 'Microsoft Yahei';
+	font-size: 14px;
+	min-width: 1200px;
+	background: #333333;
+	width: 100%;
+	height: auto;
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+    color: white;
+}
+header{
+	position: absolute;
+	width: 100%;
+	height: 168px;
+	top: 0;left: 0;
+}
+.logo{
+	position: absolute;
+	left: 149px;
+	top: 58px;
+}
+.star_factory{
+	width: 167px;
+	height: 62px;
+	background: url(img/star.png);
+	position: absolute;
+	top: 84px;
+	left: 50%;
+	margin-left: -83.5px;
+}
+
+.star_factory p{
+	margin-top: 28px;
+	color: white;
+	font-size: 20px;
+	letter-spacing: 8px;
+}
+.star_factory span{
+	color: #6e6e6e;
+	font-size: 12px;
+	letter-spacing: 3px;
+}
+.body{
+	width: 100%;
+	margin-top: 168px;
+	height: auto;
+	position: relative;
+}
+.star_content{
+	width: 350px;
+	height: 660px;
+	float: left;
+	position: relative;
+}
+.star_content>div{
+	display: none;
+}
+.star_content>div:first-child{
+	display: block;
+}
+.star_content>.movie_logo{
+	display: block;
+	width: 167px;
+	height: 62px;
+	background: url(img/star.png);
+	position: absolute;
+	left: 0;
+	top: -76px;
+}
+.star_content .toupiao1{
+	overflow: hidden;
+}
+.star_content>div .toupiao{
+	color: white;
+	font-size: 18px;
+	text-align: right;
+	float: right;
+	background: #242424;
+	height: 54px;
+	border-radius:  27px;
+	line-height: 54px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.star_content>div .toupiao span{
+	color: #e50909;
+	font-size: 30px;
+}
+.role_img{
+	width: 194px;
+	height: 194px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+.role_img>img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.nice_work .role_img{
+	width: 100%;
+	height: 175px;
+}
+.nice_work .role_img>img{
+	width: 100%;
+	height: 100%;
+	border-radius: 0;
+}
+.name,.works{
+	margin-bottom: 20px;
+}
+.works>span {
+	margin-top: 10px;
+	display: block;
+	height: 200px;
+	width: 100%;
+
+	overflow-y: auto;
+
+}
+.star_content  .warn>p{
+	font-size: 16px;
+	color: #e50909;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.star_content  .warn>input{
+	width: 50px;
+	height: 20px;
+	font-size: 16px;
+	background: #e50909;
+	color: white;
+	border: none;
+	outline: none;
+	margin-right: 15px;
+}
+.star_content p{
+	color: white;
+	font-size: 30px;
+}
+.star_content span{
+	color: #ccc;
+	font-size: 18px;
+}
+.vote_btn{
+	width: 120px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+	background: #e50909;
+	color: white;
+	font-size: 18px;
+	border-radius: 5px;
+}
+.classify{
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: auto;
+	width: 170px;
+	z-index: 150; 
+}
+.classify p{
+	width: 120px;
+	height: 50px;
+	background-color: #3a3a3a;
+	color: #999;
+	text-align: center;
+	line-height: 50px;
+	margin-bottom: 30px;
+	cursor: pointer;
+	float: right;
+	font-size: 18px;
+}
+.classify .choice{
+	width: 150px;
+	height: 70px;
+	line-height: 70px;
+	background: #e50909;
+	color: white;
+	font-size: 25px;
+}
+.last_title>h5 img{
+	position: absolute;
+	top: 5px; left: -87px;
+}
+footer{
+	width: 100%;
+	height: 90px;
+	text-align: center;
+	line-height: 90px;
+	background: #0f0f0f;
+	font-size: 20px;
+}
+#star_content3>div .works p{
+	font-size: 16px;
+}
+#star_content3>div .works p span{
+	color: #e50909;
+}
+#star_content3>div .myself p{
+	font-size: 14px;
+	color: #bab6b6;
+	margin-bottom: 5px;
+}
+#star_content3>div>p>span{
+	font-size: 30px;
+}
+.page{
+	position: absolute;
+	left: 30%;
+	bottom: 150px;
+}
+.page>a{
+	cursor: pointer;
+	font-style: 25px;
+	color:white;
+	padding: 5px;
+}
+.page>a:hover{
+	color: #e50909;
+}
+.page>.current{
+	color: #e50909;
+}
+#sb-container3>div>span,#sb-container>div>span{
+	background: url(img/actor.png) no-repeat;
+	width: 37px;
+	height: 61px;
+}
+#sb-container2>div>span{
+	background: url(img/movie.png) no-repeat;
+	width: 44px;
+	height: 44px;
+}

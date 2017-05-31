@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/home.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/wang/common_css/jq22.css">
+	<script type="text/javascript" src="__PUBLIC__/wang/common_js/slider.js"></script>
+	<style>
+		.bg{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: rgba(0,0,0,.6);
+		}
+	</style>
+	<title>阿纳巴里</title>
+</head>
+<body>
+	<header>
+		<include file="layout:header" />
+		<div id="center">
+			<div id="slider">
+				<volist name="lunbos" id="lunbo">
+					<!--{~$i =0}
+					{~$j +=$i+1}-->
+				<div class="slide" style="border-left: none; left: 0px;"><a href="{:U('home/index/detail',['id'=>$lunbo['id']])}"><img class="diapo" border="0" src="{$lunbo.image_url}" style="opacity: 0.7; visibility: visible;"></a>
+				<div class="backgroundText" style="top: 402px;"></div><div class="text" style="top: 402px;">百叶窗</div>
+				<div class="bg">
+					<a href="{:U('home/index/detail',['id'=>$lunbo['id']])}" class="content">
+						<div class="dragon">
+							<div class="top"><img src="__PUBLIC__/wang/home_img/dragon00_03.png" alt=""></div>
+						</div>
+						<div class="complate_point">{:sprintf("%.2f",(($lunbo['money'])/$lunbo['target_amount']*100))}%</div>
+						<div class="rank">
+							<!--0{$j}-->
+						</div>
+						<p class="move_title">{$lunbo.name}</p>
+						<p>导演：{$lunbo.director}</p>
+						<p>主演：{$lunbo.star}</p>
+						<p>出品单位：{$lunbo.company}</p>
+						<p>剩余时间：<span>{:dataNum(time(),$lunbo['end_time'])}</span> 天</p>
+						<p>评星 <for start="0" end="$lunbo['star_num']"><i class="star"></i></for></p>
+						<p>阿纳豆：<span>{:floor($lunbo['target_amount'])}</span></p>
+					</a>
+
+				</div>
+
+				</div>
+				</volist>
+			</div>
+			<div class="hot_news"><i class="suona"></i>最新消息：
+				<div class="news_carousel">
+					<div>
+					<volist name="news" id="new">
+						<a href="{:U('home/index/news',['id'=>$new['id']])}">{$new.title}</a>
+					</volist>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="body">	
+	<div class="move_list">
+		<p class="choice">星级</p>
+		<p>院线</p>
+		<p>网路IP</p>
+	</div>	
+		<div class="main movie_star">
+			<volist name="projectInfo" id="info">
+
+  	  <section class="page1 tps-section tps-inview">
+        <div class="page_container">
+          <h1>
+          		<a href="{:U('home/index/detail',['id'=>$info['id']])}">
+					                    <img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
+          								<div class="move_content content">
+          									<p>{$info['name']}</p>
+          									<p>导演：{$info['director']}</p>
+											<p>主演：{$info['star']}</p>
+          									<p>出品单位：{$info.company}</p>
+          									<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
+          									<p>阿纳豆：<span>{:floor($info['target_amount'])}</span></p>
+          								</div>
+          		</a>
+          	</h1>
+        </div>
+      </section>
+
+			</volist>
+    </div>
+		<div class="main cname" style="display:none;">
+			<volist name="projectInfo" id="info">
+				<if condition="$info['type_id'] eq 2">
+			<section class="page1 tps-section tps-inview">
+				<div class="page_container">
+					<h1>
+						<a href="{:U('home/index/detail',['id'=>$info['id']])}">
+							<img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
+							<div class="move_content content">
+								<p>{$info['name']}</p>
+								<p>导演：{$info['director']}</p>
+								<p>主演：{$info['star']}</p>
+								<p>出品单位：{$info.company}</p>
+								<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
+								<p>阿纳豆：<span>{:floor($info['target_amount'])}</span></p>
+							</div>
+						</a>
+					</h1>
+				</div>
+			</section>
+				</if>
+			</volist>
+		</div>
+		<div class="main webip" style="display: none">
+			<volist name="projectInfo" id="info">
+				<if condition="$info['type_id'] eq 3">
+			<section class="page1 tps-section tps-inview">
+				<div class="page_container">
+					<h1>
+						<a href="{:U('home/index/detail',['id'=>$info['id']])}">
+							<img src="{$info['image_url']}" style="position:absolute; top: 0;left: 0; width: 100%;height: 100%" alt="">
+							<div class="move_content content">
+								<p>{$info['name']}</p>
+								<p>导演：{$info['director']}</p>
+								<p>主演：{$info['star']}</p>
+								<p>出品单位：{$info.company}</p>
+								<p>评星 <for start="0" end="$info['star_num']"><i class="star"></i></for></p>
+								<p>阿纳豆：<span>{:floor($info['target_amount'])}</span></p>
+							</div>
+						</a>
+					</h1>
+				</div>
+			</section>
+				</if>
+			</volist>
+		</div>
+	</div>
+	<footer>
+		Copyright 2017 阿纳巴里国际影业
+	</footer>
+	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
+	<script type="text/javascript" src="__PUBLIC__/wang/common_js/jquery.tiltedpage-scroll.js"></script>
+	<script src='__PUBLIC__/wang/common_js/home.js'></script>
+	<script src='__PUBLIC__/wang/common_js/common.js'></script>
+	<script type="text/javascript">
+	/* ==== start script ==== */
+	slider.init();
+
+
+	function init(){
+		$('#slider>div').eq(1).css({
+			left:'20%'
+		})
+		$('#slider>div').eq(2).css({
+			left:'38.5%'
+		})
+		$('#slider>div:nth-child(1)>a>img').css({
+			opacity:1
+		})
+		$('#slider>div:nth-child(2)>a>img').css({
+			opacity:1
+		})
+
+	}
+
+	init();
+
+	var timer;
+	$('#center').on('mouseleave',function(){
+	 timer = setTimeout('init()',2000)
+		
+	})
+	$('#center').on('mouseenter',function(){
+		clearTimeout(timer)		
+	})
+
+	  $(document).ready(function(){
+	      $(".main").tiltedpage_scroll({
+	        angle: 20
+	      });
+		});
+	</script>
+</body>
+</html>

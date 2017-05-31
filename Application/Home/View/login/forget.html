@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/login_reg.css">
+	<title>阿纳巴里</title>
+</head>
+<body>
+	<div class="bg">
+		<div class="content" id='reg_content'>
+			<div class="logo"><a class="logo" href="{:U('home/index/index')}"><img src="__PUBLIC__/wang/img/logimg.png" alt=""></a></div>
+			<p class="title">找回密码</p>
+			<div class="user"><input type="text" placeholder='手机号码' name="username"></div>
+			<div class="identify"><input type="text" placeholder='短信验证码' name="captcha"><span id="get">获取验证码</span><span id="repeat_get">60秒后重新获取</span><span id='menban'></span></div>
+			<div class="pwd"><input type="password" placeholder='请输入新密码' name="password"></div>
+			<div class="invite"><input type="password" placeholder='请确认密码' name="repassword"></div>
+			<div class="login" style="margin-top:10px;" id="ok">确定</div>
+		</div>
+	</div>
+	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
+	<script src='__PUBLIC__/wang/reg.js'></script>
+	<script src='__PUBLIC__/layer/layer.js'></script>
+<script>
+	$(function(){
+		$('#get').click(function(){
+			var phone = $('input[name = username]').val();
+			if(phone == ''){
+				layer.tips('电话号码不能为空!','input[name = username]');
+				return false;
+			}else{
+				//>> 验证手机
+				//>> 判断用户名的格式是否正确
+				var _reg = /^0?(13|14|15|17|18)[0-9]{9}$/;
+				if(!_reg.test(phone)){
+					layer.tips('用户名的格式不正确!','input[name = username]');
+					return false;
+				}
+			}
+			$.ajax({
+				'type':'post',
+				'dataType':'json',
+				'url':"{:U('Home/Register/sendMessage')}",
+				'data':{
+					'phone':phone,
+				},
+				success:function(result){
+				}
+			});
+		});
+		function forget(){
+			
+			//>> 获取用户名
+			var username = $('input[name = username]').val();
+			var password = $('input[name = password]').val();
+			var repassword = $('input[name = repassword]').val();
+			var captcha = $('input[name = captcha]').val();
+			//>> 检测用户名
+			var res_1 = checkUser(username,'username');
+			if(res_1){
+				//>> 检测验证码
+				if(captcha == ''){
+					layer.tips('验证码不能为空!','input[name = captcha]');
+					return false;
+				}
+				//>> 检测密码
+				var res_2 = checkUser(password,'password');
+				if(res_2){
+					//>> 检测确认密码
+					var res_3 = checkUser(repassword,'repassword');
+					//>> 检测密码是否相等
+					if(res_3){
+						if(!(repassword === password)){
+							layer.tips('两次密码不一致!','input[name = repassword]');
+							return false;
+						}else{
+							//>> 提交表单
+							$.ajax({
+								'type':'post',
+								'dataType':'json',
+								'url':"{:U('Home/Login/forget')}",
+								'data':{
+									'phone':username,
+									'password':password,
+									'repassword':repassword,
+									'captcha':captcha
+								},
+								success:function(result){
+									if(result.status == 1){
+										layer.msg('密码修改成功!');
+										setTimeout(function(){
+											window.location.href ="{:U('Home/Login/index')}";
+										},2000);
+									}else{
+										layer.msg(result.msg);
+									}
+								}
+							});
+						}
+					}
+
+				}
+			}
+
+
+			//>> 检测用户名和密码
+			function checkUser(data,type){
+				switch (type){
+					case 'username':
+						if(data == ''){
+							layer.tips('用户名不能为空!','input[name = username]');
+							return false;
+						}
+						//>> 判断用户名的格式是否正确
+						var _reg = /^0?(13|14|15|17|18)[0-9]{9}$/;
+						if(!_reg.test(data)){
+							layer.tips('用户名的格式不正确!','input[name = username]');
+							return false;
+						}else{
+							return true;
+						}
+						break;
+					case 'password':
+						if(data == ''){
+							layer.tips('密码不能为空!','input[name = password]');
+							return false;
+						}
+						//>> 判断密码格式是否正确
+						//var reg_ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+						if(data.length < 6){
+							layer.tips('密码长度至少6位!','input[name = password]');
+							return false;
+						}else{
+							return true;
+						}
+						break;
+					case 'repassword':
+						if(data == ''){
+							layer.tips('确认密码不能为空!','input[name = repassword]');
+							return false;
+						}
+						//>> 判断密码格式是否正确
+						//var reg__ = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+						if(data.length < 6){
+							layer.tips('密码长度至少6位!','input[name = repassword]');
+							return false;
+						}else{
+							return true;
+						}
+						break;
+				}
+			}
+		
+		}
+		$('#ok').click(function(){
+			forget();
+		});
+		$('body').on('keyup',function(e){
+			if(e.keyCode==13){
+				forget();
+			}
+			
+		})
+		
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/actordetail/actordetail.css">
+	<title>角色详情</title>
+</head>
+<body>
+	<header>
+		<a href="{:U('Star/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">角色列表</a>
+		<p>角色详情</p>
+	</header>
+	<div class="movie">
+		<img src="{$movie['image_url']}" alt="">
+		<input type="hidden" name="movieId" value="{$movieId}">
+		<input type="hidden" name="roleId" value="{$roleId}">
+		<p>电影名称: <span>{$movie['name']}</span></p>
+		<p>选择申请角色:	<select name="role">
+			<volist name="roles" id="rol">
+			<option value="{$rol['id']}">{$rol['name']}</option>
+			</volist>
+		</select></p>
+		<p>申请阿纳豆: <span style="color: #e50909;" class="needMoney">{$roleInfo['money']}</span>	</p>
+	</div>
+	<div class="div">
+		<h3 >角色性格</h3>
+		<p class="intro">{$roleInfo['intro']}</p>
+		<input type="hidden" value="{$userInfo['money']}" name="crrMoney">
+	</div>
+	<div class="div">
+		<h3 >角色特征</h3>
+		<p class="feature">{$roleInfo['feature']}</p>
+	</div>
+	<div class="div" style=" margin-bottom:1rem;"> 
+		<h3 >形象风格</h3>
+		<p class="figure">{$roleInfo['figure']}</p>
+	</div>
+	<footer>
+		<p>消耗阿纳豆:<span class="needMoney ned">{$roleInfo['money']}</span></p>
+		<a href="{:U('Star/application',['id'=>$movieId])}" id="ok">立即申请</a>
+	</footer>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/actordetail/actordetail.js'></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
+</body>
+</html>

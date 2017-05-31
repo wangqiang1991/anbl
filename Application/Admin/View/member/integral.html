@@ -1,0 +1,299 @@
+<extend name="public:tpl" />
+<block name="css">
+    <style>
+        body{
+            min-width: 1200px;
+        }
+        .ms-drop input[type="checkbox"] {
+            margin-right: 3px;
+        }
+
+        .ms-drop ul > li.multiple label {
+            margin-right: 5px;
+        }
+
+        .imgInput {
+            float: left;
+            margin-right: 20px;
+            border: 1px dashed silver;
+        }
+
+        .imgInput:hover {
+            cursor: pointer;
+            border: 3px dashed silver;
+        }
+
+        .tangram-suggestion-main {
+            z-index: 100;
+        }
+
+        .some-class {
+            width: 100px !important;
+            height: 100px !important;
+            border-radius: 0;
+            line-height: 100px !important;
+            font-size: 40px;
+            font-weight: bold !important;
+            color: #666666 !important;
+            background: white !important;
+            border: dashed 1px #666666;
+        }
+
+        .radio, .checkbox {
+            padding-left: 0px !important;
+        }
+
+        .loadfile {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border: 1px dashed silver;
+            cursor: pointer;
+            color: #838383;
+            font-size: 44px;
+            line-height: calc(100px - 9px);
+            text-align: center;
+        }
+
+        .panel-default > .panel-heading {
+            background-color: #f5f5f5 !important;
+        }
+
+        .error {
+            color: red;
+            padding: 0 10px;
+        }
+
+        .ms-drop {
+            position: initial !important;
+        }
+
+        #l-map {
+            height: 500px;
+            width: auto;
+        }
+        .anchorBL{display:none;}
+    </style>
+</block>
+<block name="main">
+    <!-- page heading start-->
+    <div class="page-heading">
+        <h3>
+            会员管理
+        </h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">会员管理</a>
+            </li>
+            <li class="active"> 会员添加 </li>
+        </ul>
+    </div>
+    <section class="wrapper">
+    <!-- page start-->
+
+    <div class="row">
+        <div class="col-lg-6">
+            <section class="panel">
+                <div class="panel-body">
+                    <form action="" class="form-horizontal adminex-form" method="post" id="projectForm">
+
+                        <div class="tab-content">
+                            <h2>会员升级积分设置</h2>
+                            <!--项目基本信息-->
+                            <div class="tab-pane active" id="">
+                                <volist name="row" id="r" key="k">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Lv.{$r['level']}*所需积分</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text"  name="" data-id="{$r['level']}" <if condition="$k-1 eq 0">disabled</if> data-in="1" class="form-control" placeholder="" value="{$r['integral']}">
+                                        </div>
+                                    </div>
+                                </volist>
+                                <br>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <input type="button" class="btn btn-primary " value="保存" id="submit">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+
+        <div class="col-lg-6">
+            <section class="panel">
+                <div class="panel-body">
+                    <form action="" class="form-horizontal adminex-form" method="post" id="">
+
+                        <div class="tab-content">
+                            <h2>会员角色升级设置</h2>
+                            <!--项目基本信息-->
+                            <div class="tab-pane active" id="baseInfo">
+
+                                    <div class="form-group">
+
+                                        <label class="col-sm-2 col-sm-2 control-label">支持者条件:</label><br>
+                                        <div class="col-sm-4 col-md-4">
+                                          投资 <input type="number"  name="zhichi_touzi"  class="form-control" placeholder="" value="{$roles['0']['support']}">
+
+                                        </div>
+
+                                    </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 col-sm-2 control-label">经纪人条件:</label><br>
+                                    <div class="col-sm-4 col-md-4">
+                                        投资 <input type="number"  name="jingji_touzi"  class="form-control" placeholder="" value="{$roles['1']['support']}">
+                                        直推 <input type="number"  name="jingji_zhitui"  class="form-control" placeholder="" value="{$roles['1']['follower']}">
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 col-sm-2 control-label">制片人条件:</label><br>
+                                    <div class="col-sm-4 col-md-4">
+                                        投资 <input type="number"  name="zhipian_touzi"  class="form-control" placeholder="" value="{$roles[2]['support']}">
+
+                                        直推 <input type="number"  name="zhipian_zhichizhe"   class="form-control" placeholder="" value="{$roles[2]['follower']}">
+
+                                        直推经纪人 <input type="number"  name="zhipian_jingjiren"   class="form-control" placeholder="" value="{$roles[2]['follower_jingji']}">
+
+                                        团队 <input type="number"  name="zhipian_tuandui"   class="form-control" placeholder="" value="{$roles[2]['group']}">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 col-sm-2 control-label">出品人条件:</label><br>
+                                    <div class="col-sm-4 col-md-4">
+                                        投资 <input type="number"  name="chupin_touzi"  class="form-control" placeholder="" value="{$roles[3]['support']}">
+
+                                        直推 <input type="number"  name="chupin_zhichizhe"   class="form-control" placeholder="" value="{$roles[3]['follower']}">
+
+                                        直推制片人 <input type="number"  name="chupin_zhipianren"   class="form-control" placeholder="" value="{$roles[3]['follower_zhipian']}">
+
+                                        团队 <input type="number"  name="chupin_tuandui"   class="form-control" placeholder="" value="{$roles[3]['group']}">
+                                    </div>
+
+                                </div>
+
+                                <br>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <input type="button" class="btn btn-primary " value="保存" id="role">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+</block>
+<block name="js">
+    <!--<js href="__PUBLIC__/uploadify/jquery.uploadify.min.js"/>-->
+    <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/validate/dist/jquery.validate.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+    <script>
+$(function(){
+    $('#submit').click(function(){
+        $.each($('input[data-in = 1]'),function(){
+            if($(this).val() == ''){
+                layer.msg('金额不能为空!');
+                return false;
+            }
+        });
+        var arr = [];
+        $.each($('input[data-in = 1]'),function(k,v){
+
+            var lv = $(this).attr('data-id');
+            var int = $(this).val();
+           arr[lv] = int;
+        });
+
+        var url = location.protocol+'//'+window.location.host+'/Admin/Member/integral';
+        $.ajax({
+            'type':'post',
+            'dataType':'json',
+            'url':url,
+            'data':{
+                'integral':arr,
+            },
+            success:function(result){
+                if(result.status != ''){
+                    layer.msg(result.msg);
+                }
+            }
+        });
+    });
+
+    $('#role').click(function(){
+            var  zhichi_touzi = $('input[name=zhichi_touzi]').val();
+
+
+
+            var  jingji_zhitui = $('input[name=jingji_zhitui]').val();
+            var  jingji_touzi = $('input[name=jingji_touzi]').val();
+
+
+
+            var  zhipian_touzi = $('input[name=zhipian_touzi]').val();
+            var  zhipian_zhichizhe = $('input[name=zhipian_zhichizhe]').val();
+            var  zhipian_jingjiren = $('input[name=zhipian_jingjiren]').val();
+            var  zhipian_tuandui = $('input[name=zhipian_tuandui]').val();
+
+
+            var  chupin_touzi = $('input[name=chupin_touzi]').val();
+            var  chupin_zhichizhe = $('input[name=chupin_zhichizhe]').val();
+            var  chupin_zhipianren = $('input[name=chupin_zhipianren]').val();
+            var  chupin_tuandui = $('input[name=chupin_tuandui]').val();
+
+        $.ajax({
+            'type':'post',
+            'dataType':'json',
+            'url':location.protocol+'//'+window.location.host+'/admin/Member/roleUp',
+            'data':{
+                'zhichi_touzi':zhichi_touzi,
+
+
+                'jingji_zhitui': jingji_zhitui,
+                'jingji_touzi': jingji_touzi,
+
+
+                'zhipian_touzi':zhipian_touzi,
+                'zhipian_zhichizhe':zhipian_zhichizhe,
+                'zhipian_jingjiren':zhipian_jingjiren,
+                'zhipian_tuandui':zhipian_tuandui,
+
+                'chupin_touzi':chupin_touzi,
+                'chupin_zhichizhe':chupin_zhichizhe,
+                'chupin_zhipianren':chupin_zhipianren,
+                'chupin_tuandui':chupin_tuandui,
+            },
+            success:function(result){
+                if(result.status != ''){
+                    layer.msg(result.msg,{time:500},function () {
+                        location.reload();
+                    });
+                }
+            }
+        });
+    });
+});
+
+    </script>
+
+</block>

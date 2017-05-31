@@ -1,0 +1,169 @@
+<link href="__CSS__/style.css" rel="stylesheet">
+<link href="__CSS__/style-responsive.css" rel="stylesheet">
+<block name="css">
+    <style>
+        .loadfile {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border: 1px dashed silver;
+            cursor: pointer;
+            color: #838383;
+            font-size: 44px;
+            line-height: calc(100px - 9px);
+            text-align: center;
+        }
+        .imgInput {
+            float: left;
+            margin-right: 20px;
+            border: 1px dashed silver;
+        }
+
+        .imgInput:hover {
+            cursor: pointer;
+            border: 3px dashed silver;
+        }
+    </style>
+</block>
+<body style="background-color: white">
+<div class="panel-body">
+    <form class="form-horizontal adminex-form" method="post" action="{:U('admin/pageConfig/saved')}" id="form">
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">名字</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" value="{$director.name}" name="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">地址</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" value="{$director.address}" name="address">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">排序</label>
+            <div class="col-sm-4 col-md-4">
+                <input type="number" name="sort" class="form-control" value="1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">简介</label>
+            <div class="col-sm-10">
+                <textarea name="intro" cols="100" rows="10" class="form-control"
+                         >{$director.intro}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">粉丝人数</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" value="{$director.fans_number}" name="fans_number">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">投票人数</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" value="{$director.fans_number}" name="vote_number">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">是否上线</label>
+            <div class="col-lg-10">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="is_active" id="optionsRadios1" value="1" <if condition="$director.is_active eq 1">checked="checked"</if> >
+                        是
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="is_active" id="optionsRadios2" value="0" <if condition="$director.is_active eq 0">checked</if>>
+                        否
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">封面图</label>
+            <div class="col-sm-10">
+                <img src="{$director['image_url']}" id="img_url" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">切换封面(规格:200px*200px png)</label>
+            <div class="col-sm-10">
+                <span class="loadfile" id="file_upload">+</span>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">图片列表</label>
+            <div class="col-sm-10" id="images">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10" style="float: right;">
+                <input type="hidden" value="{$director.id}" name="id">
+                <input type="hidden" value="{$director['image_url']}" name="img_url" id="save_url">
+                <input type="submit" class="btn btn-success" value="保存" id="save">
+            </div>
+        </div>
+    </form>
+</div>
+<block name="js">
+    <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/code/js/jquery.html5upload.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#file_upload").h5upload({
+                url: "{:U('admin/pageConfig/upload')}",
+                fileObjName: 'image',
+                fileTypeExts: 'jpg,png,gif,bmp,jpeg',
+                multi: false,
+                accept: '*/*',
+                fileSizeLimit: 1024 * 1024 * 1024 * 1024,
+                queueSizeLimit:1,
+                formData: {
+                    type: 'card_positive'
+                },
+                onUploadProgress: function (file, uploaded, total) {
+                    layer.msg('正在上传');
+                },
+                onUploadSuccess: function (file, data) {
+                    data = $.parseJSON(data);
+                    if (data.status == 0) {
+                        layer.alert(data.msg, {time: 1000})
+                    } else {
+                        var _isMax = false;
+                        var path = data.url;
+                        var _html = '<div class="imgInput"><img title="点我删除" src="' + path + '" width = 100 height = 100 /><input type="hidden" name="image_url" value="' + path + '"></div>';
+                        // 获取图片列表
+                        $('#images').html(_html);
+                        $('#img_url').attr('src',path);
+                        $('#save_url').val(path);
+                        if (_isMax == false) {
+                            layer.msg('上传成功', {time: 1000})
+
+                        }
+                    }
+                },
+                onUploadError: function (file) {
+                    layer.alert('上传失败');
+                }
+            });
+
+            $('#images').on('click', '.imgInput', function () {
+                // 删除当前图片
+                $(this).remove();
+            });
+            var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+            $('#save').on('click', function(){
+                parent.layer.close(index); //执行关闭
+            });
+
+        });
+    </script>
+</block>
+</body>

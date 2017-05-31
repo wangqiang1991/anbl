@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="../common_css/reset.css">
+	<link rel="stylesheet" href="data.css">
+	<title>资料填写</title>
+</head>
+<body>
+	<header>
+		<a href="../../../../Application/Mobile/View/star/actordetail.html"><img src="../common_img/backimg.png" alt="">角色列表</a>
+		<p>资料填写</p>
+	</header>
+	<form>
+		<div>
+			<label>姓名</label><input type="text" placeholder="请填写真实姓名">
+		</div>
+		<div>
+			<label>性别</label><input type="radio"  name='sex'><span>男</span><input type="radio"  name='sex'><span>女</span>
+		</div>
+		<div>
+			<label>民族</label><input type="text" >
+		</div>
+		<div>
+			<label>出生年月</label><input type="text" placeholder="例如:1999-01-01">
+		</div>
+		<div>
+			<label>身高</label><input type="text" placeholder="请填写真实身高">
+		</div>
+		<div>
+			<label>联系号码</label><input type="text" placeholder="请填写真实手机号码">
+		</div>
+		<div>
+			<label>居住地址</label><input type="text" placeholder="请填写真实居住地址">
+		</div>
+		<div>
+			<label>邮箱</label><input type="text" placeholder="申请的结果我们会通过邮箱通知您">
+		</div>
+		<div>
+			<label style="float: left;">自我评价</label><textarea cols="30" rows="10" placeholder="根据自身情况描述"></textarea>
+		</div>
+		<div>
+			<label style="float: left;">我的特长</label><textarea cols="30" rows="10" placeholder="根据自身情况描述"></textarea>
+		</div>
+	</form>
+	<div class="upload"><span>+</span><span>点击上传全身照</span><input type="file"></div>
+	<div class="huixian" ></div>	
+	<p id="suport">确认申请</p>
+	<script src='../common_js/zepto.min.js'></script>
+	<script src='../common_js/auto-size.js'></script>
+	<script src='data.js'></script>
+</body>
+</html>

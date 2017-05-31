@@ -1,0 +1,180 @@
+body{
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+	color: white;
+	background: #333;
+}
+a{
+	text-decoration: none;
+	color: white;
+}
+li{
+	list-style: none;
+}
+header{
+	width: 100%;
+	height: 0.83rem;
+	overflow: hidden;
+	line-height: 0.83rem;
+}
+header>p:nth-child(1){
+	width: 0.6rem;
+	height: 0.83rem;
+	line-height: 0.83rem;
+	text-align: right;
+	float: left;
+}
+header>p:nth-child(1)>img{
+	width: 0.33rem;
+	height: 0.28rem;
+}
+header>p:nth-child(2){
+	width: 5.6rem;
+	height: 0.83rem;
+	line-height: 0.83rem;
+	text-align: center;
+	float: left;
+}
+header>p:nth-child(2)>img{
+	width: 1.85rem;
+	height: 0.52rem;
+}
+header>a:nth-child(3){
+	display: block;
+	width: 1rem;
+	height: 0.83rem;
+	line-height: 0.83rem;
+	text-align: left;
+	float: left;
+	font-size: 0.26rem;
+}
+header>a:nth-child(3)>img{
+	width: 0.27rem;
+	height: 0.3rem;
+	margin-left: 0.1rem;
+}
+
+
+.content>div{
+	width: 100%;
+	height: 4.2rem;
+	margin-bottom: 0.32rem;
+	background: #000;
+	overflow: hidden;
+}
+.left{
+	width: 3.8rem;
+	height: 100%;
+	line-height: 4.2rem;
+	text-align: right;
+	float: left;
+}
+.left>a{
+	display: inline-block;
+	width: 3.54rem;
+	height: 3.6rem;
+	position: relative;
+	overflow: hidden;
+}
+.left>a>img{
+	width: 100%;
+	height: 100%;    //是否自适应 auto
+}
+.star{
+	width: 2.3rem;
+	height: .4rem;
+	position: absolute;
+	top: 0.3rem;
+	right: 0;
+	background: rgba(0,0,0,0.71);
+	line-height: 0.4rem;
+	text-align: left;
+}
+.star>span{
+	font-size: 0.24rem;
+	margin-left: 0.1rem;
+}
+.star>i{
+	display: inline-block;
+	width: 0.2rem;
+	height: 0.2rem;
+	background-image: url(../common_img/star.png); 
+	background-size: 100%;
+}
+.right{
+	width: 3.4rem;
+	height: 100%;
+	float: right;
+}
+.right>p{
+	color: #999;
+	font-size: 0.24rem;
+	margin-bottom: 0.15rem;
+	width: 100%;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.right>p:first-child{
+	font-size: 0.3rem;
+	color: white;
+	margin-top: 0.3rem;
+	margin-bottom: 0.3rem;
+}
+.right>p:nth-child(3){
+		padding-bottom: 0.3rem;
+		border-bottom: 1px solid #4f4f4f;
+		margin-bottom: 0.3rem;
+}
+.right>p span{
+	font-size: 0.3rem;
+	color: #e50909;
+}
+.menu{
+	width: 3.64rem;
+	height: 5.9rem;
+	position: absolute;
+	top: 0.83rem;
+	left: 0;
+}
+.body{
+	width: 3.64rem;
+	height: 7.9rem;
+	background: #e50909;
+	overflow: hidden;
+	position: relative;
+	z-index: 5;
+}
+.body>a{
+	display: block;
+	width: 100%;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	font-size: 0.32rem;
+	margin-top: 0.3rem;
+}
+.body>a>img{
+	margin-left: 0.48rem;
+	margin-right: 0.15rem;
+}
+.body_bottom{
+	width: 100%;
+	height: 0.9rem;
+	background: #333;
+	position: absolute;
+	left: 0; bottom: 0;
+	border-top: 1px solid white;
+}
+.body_bottom>div{
+	width: 49%;
+	height: 100%;
+	float: left;
+	text-align: center;
+	line-height: 0.9rem;
+}
+.body_bottom>div:first-child{
+	border-right: 1px solid white;
+}
+.body>a:first-child{
+	background: #333;
+}

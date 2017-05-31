@@ -1,0 +1,83 @@
+<extend name="public:tpl" />
+        <!-- header section end-->
+<block name="main">
+    <div class="page-heading">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:U('admin/index/index')}">后台首页</a>
+            </li>
+            <li class="active">
+                <a href="{:U('admin/member/select')}">会员管理</a>
+            </li>
+            <li class="active"> 会员收益 </li>
+        </ul>
+    </div>
+    <!-- page heading end-->
+
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        会员收益详情
+                    </header>
+                    <div class="panel-body">
+
+                        <!--搜索开始-->
+                        <form class="form-inline" action="{:U('admin/member/getProfit')}" method="get">
+                            <div class="form-group">
+                                <label>会员电话</label>
+                                <input type="text" class="form-control" name="phone" value="{:I('get.phone')}" placeholder="请输入电话">
+                            </div>
+                            <div class="form-group">
+                                <select name="type_id" class="form-control">
+                                    <option value="">--全部类型--</option>
+                                    <option value="1" <if condition="I('get.type_id') eq 1"> selected="selected"</if>>分红</option>
+                                    <option value="2" <if condition="I('get.type_id') eq 2"> selected="selected"</if>>佣金</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">搜索</button>
+                        </form>
+
+                        <!--搜索结束-->
+                        <hr/>
+                        <div class="adv-table text-center">
+                            <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">编号</th>
+                                    <th class="text-center">会员</th>
+                                    <th class="text-center">收益类型</th>
+                                    <th class="text-center">金额</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">备注</th>
+                                    <th class="text-center">时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <if condition="empty($rows)">
+                                    <tr>
+                                        <td colspan="9">暂无数据</td>
+                                    </tr>
+                                </if>
+                                <volist name="rows" id="tag">
+                                <tr class="gradeX">
+                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                    <td style="vertical-align: middle">{$tag.username}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">分红<else />佣金</if></td>
+                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 1">正常<else />失效</if></td>
+                                    <td style="vertical-align: middle">{$tag.remark}</td>
+                                    <td style="vertical-align: middle">{:date('Y-m-d H:i',$tag['create_time'])}</td>
+                                </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                            {$pages}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</block>

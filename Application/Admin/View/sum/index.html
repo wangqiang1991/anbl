@@ -1,0 +1,538 @@
+<extend name="public:tpl" />
+<block name="css">
+    <link href="__CSS__/layui.css" rel="stylesheet">
+</block>
+<block name="main">
+    <!-- page heading start-->
+    <div class="page-heading">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:U('admin/index/index')}">后台首页</a>
+            </li>
+            <li class="active">
+                <a href="{:U('admin/project/index')}">会员管理</a>
+            </li>
+            <li class="active"> 会员明细</li>
+        </ul>
+    </div>
+    <section class="wrapper">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading custom-tab turquoise-tab">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#recharge" data-toggle="tab">充值</a>
+                            </li>
+                            <li>
+                                <a href="#withdrawals" data-toggle="tab">提现</a>
+                            </li>
+                            <li>
+                                <a href="#profit" data-toggle="tab">收益</a>
+                            </li>
+                            <li class="">
+                                <a href="#investment" data-toggle="tab">投资</a>
+                            </li>
+                            <li class="">
+                                <a href="#vote" data-toggle="tab">投票</a>
+                            </li>
+                            <li class="">
+                                <a href="#accounts" data-toggle="tab">转账</a>
+                            </li>
+                            <li class="">
+                                <a href="#apply" data-toggle="tab">演员申请</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="panel-body">
+                            <div class="tab-content">
+
+                                <!--搜索结束-->
+
+                                <!--充值-->
+                                <div class="tab-pane  active" id="recharge">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">会员</th>
+                                                <th class="text-center">充值阿纳豆</th>
+                                                <th class="text-center">充值方式</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tbody_1">
+                                            <if condition="empty($orderList)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="orderList" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">+{$tag.money}</td>
+                                                    <td style="vertical-align: middle">{$tag.payname}</td>
+                                                    <td style="vertical-align: middle"><span class="label label-success">充值成功</span></td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+                                    <input type="hidden" value="{$count_chongzhi}" name="count_chongzhi">
+                                    <input type="hidden" value="{:I('get.id')}" name="member_id">
+                                    <div id="demo1"></div>
+
+                                </div>
+                                <!--提现-->
+                                <div class="tab-pane" id="withdrawals">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped" >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">提现阿纳豆</th>
+                                                <th class="text-center">手续费</th>
+                                                <th class="text-center">实际提现</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tbody_2">
+                                            <if condition="empty($tixian)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="tixian" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 1" ><span style="color: red">-{$tag.money}</span><elseif condition="$tag['is_pass'] eq 2" /><span style="color: forestgreen">+{$tag.money}</span><else/><span style="color: orange">{$tag.money}</span></if></td>
+                                                    <td style="vertical-align: middle">{$tag.charge}</td>
+                                                    <td style="vertical-align: middle">{$tag['money'] - $tag['charge']}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_pass'] eq 0"><span class="label label-warning">未审核</span><elseif condition="$tag.is_pass eq 2"/><span class="label label-danger">拒绝</span><elseif condition="$tag.is_pass eq 1"/><span class="label label-success">通过</span></if></td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        <input type="hidden" value="{$count_tixian}" name="count_tixian">
+                                        <div id="demo2"></div>
+                                    </div>
+
+                                </div>
+                                <!--收益-->
+                                <div class="tab-pane" id="profit">
+                                    <hr>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">来源</th>
+                                                <th class="text-center">备注</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tbody_3">
+                                            <if condition="empty($allget)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="allget" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 0 "><span style="color: red">-{$tag.money}</span><else/><span style="color: forestgreen">+{$tag.money}</span></if></td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['type'] eq 1">分红<elseif condition="$tag['type'] eq 2"/>分佣<elseif condition="$tag['type'] eq 4"/>转账 </if></td>
+                                                    <td style="vertical-align: middle">{$tag.remark}</td>
+                                                    <td style="vertical-align: middle">{$tag.intro}</td>
+                                                    <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 0 "><span class="label label-danger">失效</span><else/><span class="label label-success">正常</span></if></td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
+
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        <input type="hidden" name="allc" value="{$allc}">
+                                        <div id="demo3"></div>
+                                    </div>
+
+                                </div>
+                                <!--投资-->
+                                <div class="tab-pane" id="investment">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">投资阿纳豆</th>
+                                                <th class="text-center">消费类型</th>
+                                                <th class="text-center">投资影片</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tbody_4">
+                                            <if condition="empty($consume_1)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="supportSituation" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.aid}</td>
+                                                    <td style="vertical-align: middle">-{$tag.support_money}</td>
+                                                    <td style="vertical-align: middle">影片投资</td>
+                                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        <input type="hidden" name="count_touzi" value="{$count_touzi}">
+                                        <div id="demo4"></div>
+                                    </div>
+
+                                </div>
+                                <!--投票-->
+                                <div class="tab-pane" id="vote">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($consume_3)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="consume_3" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">-{$tag.money}</td>
+                                                    <td style="vertical-align: middle">投票</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
+
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                                <!--转账-->
+                                <div class="tab-pane" id="accounts">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">转出账户</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tbody_5">
+                                            <if condition="empty($allConsume)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="allConsume" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">-{$tag.money}</td>
+                                                    <td style="vertical-align: middle">转账</td>
+                                                    <td style="vertical-align: middle">{$tag['to_username']}</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        <input type="hidden" name="allcon" value="{$allcon}">
+                                        <div id="demo5"></div>
+                                    </div>
+
+                                </div>
+                                <!--演员申请-->
+                                <div class="tab-pane" id="apply">
+                                    <hr/>
+                                    <div class="adv-table text-center">
+                                        <table  class="display table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">阿纳豆</th>
+                                                <th class="text-center">类型</th>
+                                                <th class="text-center">时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <if condition="empty($consume_2)">
+                                                <tr>
+                                                    <td colspan="9">暂无数据</td>
+                                                </tr>
+                                            </if>
+                                            <volist name="consume_2" id="tag">
+                                                <tr class="gradeX">
+                                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                                    <td style="vertical-align: middle">演员申请</td>
+                                                    <td style="vertical-align: middle">{$tag['create_time']}</td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                        {$pages}
+                                    </div>
+
+                                </div>
+                            </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="js">
+    <script src="__JS__/layer/layui.js"></script>
+    <script src="__JS__/layer/laypage.js"></script>
+    <script>
+        $(function(){
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo1'
+                    ,pages: $('input[name = count_chongzhi]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_1').html('');
+                                    $.each(result.orderList,function (k,v) {
+                                        $('#tbody_1').append(' <tr class="gradeX">'+
+                                            '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                       '<td style="vertical-align: middle">+'+v.money+'</td>'+
+                                       ' <td style="vertical-align: middle">'+v.payname+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.is_pass+'</td>'+
+                                            '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                        '</tr>');
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo2'
+                    ,pages: $('input[name = count_tixian]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_2').html('');
+                                    $.each(result.tixian,function (k,v) {
+                                        if(v.is_pass == 0){
+                                            $('#tbody_2').append('  <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: orange">'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.charge+'</td>'+
+                                                '<td style="vertical-align: middle">'+(v.money - v.charge)+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-warning">未审核</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                                '</tr>');
+                                        }
+                                        if(v.is_pass == 1){
+                                            $('#tbody_2').append('  <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: red">-'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.charge+'</td>'+
+                                                '<td style="vertical-align: middle">'+(v.money - v.charge)+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-success">通过</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                                '</tr>');
+                                        }
+                                        if(v.is_pass == 2){
+                                            $('#tbody_2').append('  <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: forestgreen">+'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.charge+'</td>'+
+                                                '<td style="vertical-align: middle">'+(v.money - v.charge)+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-danger">拒绝</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                                '</tr>');
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo3'
+                    ,pages: $('input[name = allc]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_3').html('');
+                                    $.each(result.allget,function (k,v) {
+                                        if(v.is_ok == 0){
+                                            $('#tbody_3').append(' <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: red">-'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.type+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.intro+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-danger">失效</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+
+                                                '</tr>');
+                                        }
+                                        if(v.is_ok == 1){
+                                            $('#tbody_3').append(' <tr class="gradeX">'+
+                                                '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                                '<td style="vertical-align: middle;color: forestgreen">+'+v.money+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.type+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.intro+'</td>'+
+                                                '<td style="vertical-align: middle">'+'<span class="label label-success">正常</span>'+'</td>'+
+                                                '<td style="vertical-align: middle">'+v.create_time+'</td>'+
+
+                                                '</tr>');
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo4'
+                    ,pages: $('input[name = count_touzi]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_4').html('');
+                                    $.each(result.touzi,function (k,v) {
+                                        $('#tbody_4').append(' <tr class="gradeX">'+
+                                            '<td style="vertical-align: middle">'+v.aid+'</td>'+
+                                        '<td style="vertical-align: middle">-'+v.money+'</td>'+
+                                        '<td style="vertical-align: middle">影片投资</td>'+
+                                           ' <td style="vertical-align: middle">'+v.name+'</td>'+
+                                       ' <td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                        '</tr>');
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage,layer = layui.layer;
+                laypage({
+                    cont: 'demo5'
+                    ,pages: $('input[name = allcon]').val()
+                    ,skip: true
+                    ,jump: function(obj, first){
+                        if(!first){
+                            $.ajax({
+                                'type':'post',
+                                'dataType':'json',
+                                'url':"{:U('admin/Sum/index')}",
+                                'data':{
+                                    'pgNum':obj.curr,
+                                    'pgSize':17,
+                                    'id':$('input[name = member_id]').val(),
+
+                                },
+                                success:function(result){
+                                    $('#tbody_5').html('');
+                                    $.each(result.zhuanzhang,function (k,v) {
+                                        $('#tbody_5').append(' <tr class="gradeX">'+
+                                            '<td style="vertical-align: middle">'+v.id+'</td>'+
+                                            '<td style="vertical-align: middle">-'+v.money+'</td>'+
+                                            '<td style="vertical-align: middle">转账</td>'+
+                                            ' <td style="vertical-align: middle">'+v.to_username+'</td>'+
+                                            ' <td style="vertical-align: middle">'+v.create_time+'</td>'+
+                                            '</tr>');
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</block>

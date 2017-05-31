@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/account/account.css">
+	<title>我的账户</title>
+</head>
+<body>
+	<header>
+		<div style="width: 100%;height: auto;overflow: hidden;">
+			<a href="{:U('Index/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">首页</a>
+			<a href="{:U('Index/share')}">分享注册<img src="__PUBLIC__/wang/home/share.png" alt=""></a>
+		</div>
+		<p style="clear: both;overflow: hidden; width: 3rem;text-align:center;margin: auto;" class="name"><if condition="$personal['is_true'] eq 1">{$personal['realname']}<else/>{:telephoneNumber($personal['username'])}</if><span style="margin-left: 0.1rem;font-size:0.2rem;color: #f4e38e">{:getUserLevelsName($personal['role'])}</span></p>
+		<!--<p style="clear: both;" class="lv"><img src="__PUBLIC__/wang/account/level{$personal['level']}.png" alt=""><if condition="$allInfo['status'] eq 1">还差{$allInfo['integral']}个阿纳豆，您就升到Lv{$allInfo['level']}啦<else/>
+			Lv{$personal['level']}:{$personal['money']}阿纳豆
+		</if></p>-->
+	</header>
+	<div class="xiaohao">
+		<p>已支持阿纳豆：<span>{$supportMoney}</span></p>
+		<p>剩余阿纳豆：<span>{$personal['money']}</span></p>
+	</div>
+	<div class="user">
+		<p>账户:{$secretPhone}</p>
+		<p class="shiming">实名:
+			<if condition="$personal['is_true'] eq 0"> <span style="color: red;">未实名</span>
+			<else/><span style="color: forestgreen;"> 已实名</span></if><if condition="$personal['is_true'] eq 0"> <a href="{:U('Account/checkTrue')}" style="color: orange">马上认证>></a></if></p>
+	</div>
+	<footer>
+		<a href="{:U('Account/rechargeIndex')}">提现</a>
+		<a href="{:U('Account/cashIndex')}">充值</a>
+		<a href="{:U('Account/upCredence')}">上传凭证</a>
+	</footer>
+	<script src='__PUBLIC__//wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/account/account.js'></script>
+</body>
+</html>

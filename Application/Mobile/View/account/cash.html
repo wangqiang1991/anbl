@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/putmoney/putmoney.css">
+	<title>充值</title>
+</head>
+<body>
+	<header>
+		<a href="{:U('Account/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">我的账户</a>
+		<p>充值</p>
+	</header>
+	<div class="way">
+		<p id="zhifubao" class="choice">{$ali['name']}</p>
+		<p id="weixing">{$weixin['name']}</p>
+	</div>
+	<div class="zhifubao">
+		<img src="{$ali['image_url']}" alt="">
+		<br>
+
+	</div>
+	<div class="weixing" style="display: none;">
+		<img src="{$weixin['image_url']}" alt="">
+		<br>
+
+	</div>
+	<div class="step">
+		<h4>第一步</h4>
+		<p>1.使用手机应用扫描二维码后在相应的应用进行操作</p>
+		<p>2.下载此二维码使用相应的应用打开后进行操作</p>
+	</div>
+	<div class="step">
+		<h4>第二步</h4>
+		<p>完成第一步操作后,对成功操作页面进行截图</p>
+	</div>
+	<div class="step">
+		<h4>第三步</h4>
+		<p>1.回到我的账户页面选择上传凭证</p>
+		<p>2.在上传凭证页面,按页面提示选择相应的选项,并上传截图</p>
+	</div>
+
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/putmoney/putmoney.js'></script>
+	<script src="__PUBLIC__/js/clipboard.min.js"></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
+	<script type="text/javascript">
+		$('.btn1').click(function(){
+			var clipboard = new Clipboard('.btn1');
+			//优雅降级:safari 版本号>=10,提示复制成功;否则提示需在文字选中后，手动选择“拷贝”进行复制
+			clipboard.on('success', function(e) {
+				layer.open({
+					content: "复制成功",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				e.clearSelection();
+			});
+			clipboard.on('error', function(e) {
+				layer.open({
+					content: "请选择“拷贝”进行复制!",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+			});
+		});
+		$('.btn2').click(function(){
+			var clipboard = new Clipboard('.btn2');
+			//优雅降级:safari 版本号>=10,提示复制成功;否则提示需在文字选中后，手动选择“拷贝”进行复制
+			clipboard.on('success', function(e) {
+				layer.open({
+					content: "复制成功",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				e.clearSelection();
+			});
+			clipboard.on('error', function(e) {
+				layer.open({
+					content: "请选择“拷贝”进行复制!",
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+			});
+		});
+	</script>
+</body>
+</html>

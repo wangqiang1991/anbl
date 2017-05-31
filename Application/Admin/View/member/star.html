@@ -1,0 +1,142 @@
+<extend name="public:tpl" />
+<block name="css">
+    <!--layer-->
+    <link href="__CSS__/layui.css" rel="stylesheet">
+</block>
+        <!-- header section end-->
+<block name="main">
+    <div class="page-heading">
+        <h3>
+            会员管理
+        </h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">会员管理</a>
+            </li>
+            <li class="active"> 明星会员 </li>
+        </ul>
+    </div>
+    <!-- page heading end-->
+
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        明星列表
+                    </header>
+                    <div class="panel-body">
+<input type="hidden" value="{$count}" name="count">
+                        <!--搜索开始-->
+
+                        <!--搜索结束-->
+
+
+
+                        <!--导出结束-->
+
+
+                        <hr/>
+                        <div class="adv-table text-center">
+                            <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">编号</th>
+                                    <th class="text-center">邮箱</th>
+                                    <th class="text-center">名字</th>
+                                    <th class="text-center">性别</th>
+                                    <th class="text-center">身高</th>
+                                    <th class="text-center">住址</th>
+                                    <th class="text-center">申请影片</th>
+                                    <th class="text-center">申请角色</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="body">
+                                <if condition="empty($star)">
+                                    <tr>
+                                        <td colspan="9">暂无数据</td>
+                                    </tr>
+                                </if>
+                                <volist name="star" id="s">
+                                <tr class="gradeX">
+                                    <td style="vertical-align: middle">{$s.id}</td>
+                                    <td style="vertical-align: middle">{$s.email}</td>
+                                    <td style="vertical-align: middle">{$s.name}</td>
+                                    <td style="vertical-align: middle"><if condition="$s.sex eq 1">男<else/>女</if></td>
+                                    <td style="vertical-align: middle">{$s.height}cm</td>
+                                    <td style="vertical-align: middle">{$s.address}</td>
+                                    <td style="vertical-align: middle">{$s.filmname}</td>
+                                    <td style="vertical-align: middle">{$s.rolename}</td>
+                                    <td style="vertical-align: middle"><if condition="$s.is_pass eq 1"><span class="label label-success">已通过</span><elseif condition="$s.is_pass eq 0"/><span class="label label-warning">已拒绝</span>
+                                        <elseif condition="$s.is_pass eq 2"/><span class="label label-danger">未处理</span></if></td>
+                                    <td style="vertical-align: middle"><a href="{:U('admin/Member/memberStarDetail',['id'=>$s['id']])}"><input type="button" data-id="{$s['id']}" class="btn btn-xs  btn-info" value="详情"  ></a>&nbsp;&nbsp;&nbsp;
+                                  <if condition="$s.status eq 0"><input type="button"  data-id="{$s['id']}" data-email="{$s.email}" data-result="1" class="btn btn-xs btn-success status1" value="通过"  >&nbsp;&nbsp;&nbsp;
+                                      <input type="button"  data-id="{$s['id']}" data-member="{$s.member_id}" class="btn btn-danger btn-xs status1" data-result="0" data-email="{$s.email}"   value="拒绝"  ></if>
+                                    </td>
+                                </tr>
+                                </volist>
+                                </tbody>
+
+                            </table>
+                            {$pages}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">提示：Notice!</h4>
+                </div>
+                <div class="modal-body">
+                    你确认要删除吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a href="" id="deleteTrue" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+    <script>
+
+    </script>
+</block>
+<block name="js">
+    <!--layer.js-->
+    <script src="__JS__/layer/layui.js"></script>
+    <script src="__JS__/layer/laypage.js"></script>
+    <script>
+        $(function(){
+            $('.status1').click(function(){
+                result = $(this).attr('data-result');
+                email = $(this).attr('data-email');
+                id = $(this).attr('data-id');
+                member_id = $(this).attr('data-member');
+                url = location.protocol+'//'+window.location.host+'/admin/Member/sendToMember';
+                $.ajax({
+                    'type':'post',
+                    'dataType':'json',
+                    'url':url,
+                    'data':{'result':result,'email':email,'id':id,'member_id':member_id},
+                    success:function(result){
+                        if(result.status == 1){
+                            layer.msg('邮件发送成功',function(){
+                                location.reload();
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,28 @@
+<div class="nav">
+    <div>
+        <a class="logo" href="{:U('home/index/index')}"><img src="__PUBLIC__/wang/img/logo.png" alt=""></a>
+        <ul class="top_nav">
+            <li><a href="{:U('home/index/index')}"><p>首页</p><p>Home</p></a></li>
+            <li style="position: relative;"><a href="#"><p>公司介绍</p><p>Company</p></a>
+                <dl>
+                    <dd><a href="{:U('home/company/about')}">关于我们</a></dd>
+                    <dd><a href="{:U('home/company/index')}">公司文化</a></dd>
+                </dl>
+            </li>
+            <li><a href="{:U('home/market/index')}"><p>电影超市</p><p>Movie store</p></a></li>
+            <li><a href="{:U('home/factory/index')}"><p>星工场</p><p>Star Factory</p></a></li>
+            <li><a href="{:U('Home/Personal/index')}"><p>个人中心</p><p>Personal Center</p></a></li>
+        </ul>
+        <ul class="login_reg">
+            <li  class="search_li" style="position: relative;"><input id="search_cont" type="text"><i id="search_btn"></i></li>
+            <if condition="$userInfo['username'] eq ''"><li ><a id="login" href="{:U('Home/Login/index')}">登录 |</a></li>
+                <li ><a href="{:U('Home/Register/index')}">注册</a></li><else/>
+                <li class="user_img"><span>{:telephoneNumber($userInfo['username'])}</span></li>
+                <li class="login_out"><a href="{:U('Home/Login/logout')}">退出登录</a></li>
+            </if>
+
+        </ul>
+    </div>
+</div>
+<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
+<script type="application/javascript"></script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/actorlist/actorlist.css">
+	<title>演员列表</title>
+</head>
+<body>
+	<header>
+		<a href="{:U('Index/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">首页</a>
+		<p>我要当演员</p>
+	</header>
+	<div class="content">
+		<volist name="recruit" id="na">
+		<div class="movielist">
+			<a href="{:U('Star/starInfo',['id'=>$na['id']])}" class="movie" >
+				<img src="{$na['image_url']}" alt="">
+				<p>{$na['name']}</p>
+			</a>
+			<p style="color: red">需消耗阿纳豆<span></span></p>
+		</div>
+		</volist>
+
+	</div>
+
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/actorlist/actorlist.js'></script>
+</body>
+</html>

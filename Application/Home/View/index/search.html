@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/search/search_result.css">
+	<title>搜索结果</title>
+</head>
+<body>
+<header>
+	<include file="layout:header" />
+</header>
+	<div class="content">
+		<if condition="empty($searchInfos)">
+			<div>
+				<img src="__PUBLIC__/wang/search/img/search_noresult_01.jpg" style="width: 220px;height: 220px" alt=""> <span>很抱歉没有找到"<a style="margin: 0px">{$searchno}</a>"相关的内容</span><a href="{:U('home/index/index')}">点击此处回到首页</a>
+			</div>
+		</if>
+		<volist name="searchInfos" id="info">
+		<ul>
+			<li><a href="{:U('home/index/detail',['id'=>$info['id']])}">
+				                        <div class="movie_content">
+											<p>{$info['name']}</p><br>
+											<p>导演：{$info['director']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主演：{$info['star']}</p><br>
+											<p>出品单位：{$info.company}</p>
+											<p>评星 <i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></p>
+											<p>支持积分：<span>{:floor($info['target_amount'])}</span></p>
+          								</div>
+				<img src="{$info['image_url']}" alt="">
+				</a>
+			</li>
+		</ul>
+		</volist>
+	</div>
+	<script src='__PUBLIC__/wang/common_js/jquery-1.12.4.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/common.js'></script>
+	<script>
+	var text=decodeURI(window.location.href);
+
+	var search_content=text.slice(text.indexOf('?text=')+6);
+
+			// 搜索的关键字为  search_content
+			console.log(search_content)
+
+
+	</script>
+</body>
+</html>

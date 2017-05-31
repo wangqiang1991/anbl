@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/detail/detail.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/layerMobile/need/layer.css">
+	<title>电影详情</title>
+</head>
+<body>
+	<header id="header">
+		<a href="{:U('index/index')}"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">首页</a>
+		<p>项目详情</p>	
+	</header>
+	<div class="detail_img">
+		<img src="{$info.image_url}" alt="">
+	</div>
+	<div class="mubiao">
+		<p>项目已获阿纳豆:</p>
+		<p><span class="money">{:floor($info['money'])}</span><span class="jinxing">{:getProjectSpeed($info['speed'])}</span></p>
+	</div>
+	<ul class="renshu">
+		<li><p>目标阿纳豆</p><span>{:floor($info['target_amount'])}</span></li>
+		<li><p>支持人数</p><span>{$info['support_number']}人</span></li>
+	</ul>
+	<div class="movie movie1">
+		<h3>剧情简介</h3>
+		<p>{:htmlspecialchars_decode($info['story'])}</p>
+	</div>
+	<div class="movie movie1">
+		<h3>演艺阵容</h3>
+		<p>{:htmlspecialchars_decode($info['analysis'])}</p>
+	</div>
+	<div class="movie movie1">
+		<h3>受众定位</h3>
+		<p>{:htmlspecialchars_decode($info['film_critic'])}</p>
+	</div>
+	<div class="movie movie1" style="padding-bottom: 1.1rem;">
+		<h3>预期回报</h3>
+		<p>{:htmlspecialchars_decode($info['expected_return'])}</p>
+	</div>
+	<if condition="$info['target_amount'] gt $info['money']">
+		<a href="#header" class="now_suport">立即支持</a>
+		<else />
+		<a href="#header" class="now_suportone">筹集成功</a>
+	</if>
+	<div class="bg" style="display: none;">
+		<div id="suport_div">
+			<p>回报类型:</p>
+			<div class="fenghong"><input type="radio" value="1" name='xin' id="lei1" checked><label for="lei1">月酬 </label><input type="radio" value="2" name="xin" id="lei2"><label for="lei2">票房 </label></div>
+			<p>选择支持阿纳豆:</p>
+			<div class="jifeng">
+				<input type="number" name="money" placeholder="支持100-70000且需为100整数" style="width: 4rem;padding-left:0.3rem;height: 0.5rem;border: none;
+				outline: none; background: black;color: white;border-radius: 3px;font-size: 0.26rem;"  />
+			</div>
+			<div id="apply"><input type="checkbox" id="xieyi"><label for="xieyi">我同意<a href="{:U('index/apply',['id'=>$info['id']])}">《阿纳巴里用户协议》</a></label></div>
+			<p id="suport">立即支持</p>
+			<i class="close_model"></i>
+		</div>
+	</div>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/detail/detail.js'></script>
+	<script src='__PUBLIC__/wang/layerMobile/layer.js'></script>
+	<script type="application/javascript">
+
+		$('.now_suport').click(function(){
+			var  isLogin = "{$isLogin}";
+			if(isLogin == 0){
+				layer.open({
+					content: '您还没有登录',
+					style: 'color:red;',
+					btn: ['登录', '取消'],
+					yes: function(index){
+						window.location.href = "{:U('Login/index')}"
+						layer.close(index);
+					}
+				});
+				return false;
+			}else{
+				$('.bg').show();
+
+			}
+		});
+
+		$('.close_model').click(function(){
+			$('.bg').hide();
+		});
+		$('#suport').on('click',function(){
+
+			// 判断用户是否同意协议
+			if(!$("#xieyi").is(':checked')){
+				layer.open({
+					content: '请同意服务协议'
+					,skin: 'msg'
+					,time: 2 //2秒后自动关闭
+				});
+				return false
+			}
+			// 选择分红方式
+			var fh = $(".fenghong>input[type='radio']:checked").val();
+
+			// 选择积分多少
+			var money = $(".jifeng>input[type='number']").val();
+			if(money<100 || money>70000){
+				layer.open({
+					content: '阿纳豆不能少于100或者大于70000',
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				return false
+			}
+			if(money%100 != 0){
+				layer.open({
+					content: '阿纳豆必须是100的倍数',
+					skin: 'msg',
+					time: 2 //2秒后自动关闭
+				});
+				return false
+			}
+
+			var project_id="{$info['id']}";
+			var _data = {
+				money : money,
+				project_id : project_id,
+				type : fh
+			};
+			$.post("{:U('index/support')}",_data,function (data) {
+				if (data.status == 0) {
+					layer.open({
+						content: data.msg,
+						style: 'color:red;',
+						btn: '我知道了'
+					});
+				} else {
+					layer.open({
+						content: data.msg,
+						skin: 'msg',
+						time: 2 //2秒后自动关闭
+					});
+					$('.bg').hide();
+				}
+			});
+		})
+	</script>
+
+
+</body>
+</html>

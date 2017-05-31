@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/wang/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/login_reg.css">
+	<title>阿纳巴里</title>
+</head>
+<body>
+<div class="bg">
+	<div class="content" id='reg_content'>
+		<div class="logo"><a class="logo" href="{:U('home/index/index')}"><img src="__PUBLIC__/wang/img/logimg.png" alt=""></a></div>
+		<p class="title">用户注册</p>
+		<form method="post" action="{:U('home/register/register')}" id="registerForm">
+			<div class="user"><input type="text" placeholder='手机号码' maxlength="11" name="phone"></div>
+			<div class="pwd"><input type="password"  placeholder='登录密码' name="password"></div>
+			<div class="pwd"><input type="password"  placeholder='确认密码' name="repassword"></div>
+			<div class="identify"><input type="text" placeholder='短信验证码' name="captcha"><span id="get" style="cursor: pointer;">获取验证码</span><span id="repeat_get">60秒后重新获取</span><span id='menban'></span></div>
+			<if condition="!empty($invite_key)">
+				<div class="invite"><input type="text" placeholder='邀请码(必填)' name="invite_key" disabled value="{$invite_key}"></div>
+				<else />
+				<div class="invite"><input type="text" placeholder='邀请码(必填)' name="invite_key" ></div>
+			</if>
+
+			<p class="agreement">点击注册,即表示您已经同意<a href="{:U('home/index/agreement')}" id="agreement">《阿纳巴里服务协议》</a></p>
+			<div class="login" style="margin-bottom:20px;" id="ok">马上注册</div>
+		</form>
+		已有账号,<a href="{:U('home/login/index')}" style="color: orange;font-size: 20px">立即登录</a>
+	</div>
+</div>
+<script src='__PUBLIC__/wang//jquery-1.12.4.min.js'></script>
+<script src='__PUBLIC__/wang/reg.js'></script>
+<script src='__PUBLIC__/layer/layer.js'></script>
+<script src='__PUBLIC__/validate/dist/jquery.validate.js'></script>
+
+</body>
+</html>

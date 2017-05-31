@@ -1,0 +1,97 @@
+<extend name="public:tpl" />
+        <!-- header section end-->
+<block name="main">
+    <div class="page-heading">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:U('admin/index/index')}">后台首页</a>
+            </li>
+            <li class="active">
+                <a href="{:U('admin/count/projectCount')}">数据管理</a>
+            </li>
+            <li class="active"> 财务数据统计 </li>
+        </ul>
+    </div>
+    <!-- page heading end-->
+
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        财务数据统计
+                    </header>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <!--statistics start-->
+                            <div class="row state-overview">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="panel purple">
+                                        <div class="symbol">
+                                            <i class="fa fa-gavel"></i>
+                                        </div>
+                                        <div class="state-value">
+                                            <div class="value">{$amoney}</div>
+                                            <div class="title">会员充值金额</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="panel red">
+                                        <div class="symbol">
+                                            <i class="fa fa-tags"></i>
+                                        </div>
+                                        <div class="state-value">
+                                            <div class="value">{$bmoney}</div>
+                                            <div class="title">会员提现金额</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row state-overview">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="panel blue">
+                                        <div class="symbol">
+                                            <i class="fa fa-money"></i>
+                                        </div>
+                                        <div class="state-value">
+                                            <div class="value"> {$cmoney}</div>
+                                            <div class="title">会员分红总额</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="panel green">
+                                        <div class="symbol">
+                                            <i class="fa fa-eye"></i>
+                                        </div>
+                                        <div class="state-value">
+                                            <div class="value">{$dmoney}</div>
+                                            <div class="title"> 会员分佣总额</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--statistics end-->
+                        </div>
+                        <br>
+                        <!--搜索结束-->
+                        <!--搜索开始-->
+                        <form style="clear: both" class="form-inline" action="{:U('admin/count/financeCount')}" method="get">
+                            <div class="form-group">
+                                <label>统计开始时间</label>
+                                <input type="date" class="form-control" name="start_time" value="{:I('get.start_time')}" placeholder="请输入订单时间">
+                            </div>
+                            <div class="form-group">
+                                <label>统计结束时间</label>
+                                <input type="date" class="form-control" name="end_time" value="{:I('get.end_time')}" placeholder="请输入订单时间">
+                            </div>
+                            <button type="submit" class="btn btn-primary">统计</button>
+                        </form>
+                        <hr/>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</block>

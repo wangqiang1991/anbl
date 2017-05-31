@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+<form class="form-horizontal" role="form">
+
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">静态分红制度设置：</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">月酬分红比例</label>
+        <div class="col-sm-4 col-md-4">
+            <div class="input-group">
+                <input type="number" name="fixed_rate" class="form-control" placeholder=" " value="{$row['fixed_rate']}">
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">票房分红比例</label>
+        <div class="col-sm-4 col-md-4">
+            <div class="input-group">
+                <input type="number" name="float_rate" class="form-control" placeholder=" " value="{$row['float_rate']}">
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">动态分红制度设置：</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">一代分佣比例</label>
+        <div class="col-sm-4 col-md-4">
+            <div class="input-group">
+                <input type="number" name="first_rate" class="form-control" placeholder=" " value="{$row['first_rate']}">
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">二代分佣比例</label>
+        <div class="col-sm-4 col-md-4">
+            <div class="input-group">
+                <input type="number" name="two_rate" class="form-control" placeholder=" " value="{$row['two_rate']}">
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">三代分佣比例</label>
+        <div class="col-sm-4 col-md-4">
+            <div class="input-group">
+                <input type="number" name="three_rate" class="form-control" placeholder=" " value="{$row['three_rate']}">
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+    </div>
+    <input name="id" type="hidden" value="{$id}">
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="button" class="btn btn-success" value="保存"/>
+        </div>
+    </div>
+
+</form>
+</body>
+<script src="__JS__/jquery-1.10.2.min.js"></script>
+<script>
+    $(function(){
+        $('input[type = button]').click(function(){
+            id =
+            $.ajax({
+                'type':'post',
+                'dataType':'json',
+                'url':"{:U('admin/project/saveRate')}",
+                'data':{
+                    'fixed_rate':$('input[name = fixed_rate]').val(),
+                    'float_rate':$('input[name = float_rate]').val(),
+                    'first_rate':$('input[name = first_rate]').val(),
+                    'two_rate':$('input[name = two_rate]').val(),
+                    'three_rate':$('input[name = three_rate]').val(),
+                    'id':$('input[name = id]').val(),
+                },
+                success:function(result){
+                    if(result.status == 1){
+                        var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+
+                        parent.layer.close(index); //执行关闭
+                    }
+
+                }
+            });
+        });
+    });
+</script>
+</html>

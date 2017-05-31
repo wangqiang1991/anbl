@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="__PUBLIC__/wang/common_css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/wang/project/project.css">
+	<title>我的项目</title>
+</head>
+<body>
+	<header>
+		<a href="../index.html"><img src="__PUBLIC__/wang/common_img/backimg.png" alt="">首页</a>
+		<p>我的项目</p>
+	</header>
+	<div class="content">
+		<if condition="empty($projectInfo)"><h1>没有支持项目</h1></if>
+		<volist name="projectInfo" id="info">
+		<div>
+			<div class="left">
+				<a href="{:U('index/detail',['id'=>$info['project_id']])}">
+				<img src="{$info.image_url}" alt="">
+				<div class="star">
+				<span>评星:</span>
+					<for start="0" end="$info['star_num']"><i></i></for>
+				</div>
+				</a>
+			</div>
+			<div class="right">
+				<p>{$info['name']}</p>
+				<p>支持阿纳豆: <span> {$info['support_money']}</span></p>
+				<p>类型: <span><if condition="$info['type'] eq 1">月酬<else />票房</if></span>&nbsp;&nbsp;收益: <span><if condition="$info['type'] eq 1">{$info['fixed']}<else />{$info['float']}</if></span></p>
+				<p>状态: <span><if condition="$info['target_amount'] gt $info['money']">正在进行中<else />完成</if></span></p>
+				<p>导演:{$info['director']}</p>
+				<p>主演:{$info['star']}</p>
+			</div>
+		</div>
+		</volist>
+
+	</div>
+	<script src='__PUBLIC__/wang/common_js/zepto.min.js'></script>
+	<script src='__PUBLIC__/wang/common_js/auto-size.js'></script>
+	<script src='__PUBLIC__/wang/project/project.js'></script>
+</body>
+</html>

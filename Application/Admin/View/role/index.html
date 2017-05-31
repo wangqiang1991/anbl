@@ -1,0 +1,197 @@
+<extend name="public:tpl" />
+<block name="css">
+    <style>
+        .ms-drop input[type="checkbox"] {
+            margin-right: 3px;
+        }
+
+        .ms-drop ul > li.multiple label {
+            margin-right: 5px;
+        }
+
+        .imgInput {
+            float: left;
+            margin-right: 20px;
+            border: 1px dashed silver;
+        }
+
+        .imgInput:hover {
+            cursor: pointer;
+            border: 3px dashed silver;
+        }
+
+        .tangram-suggestion-main {
+            z-index: 100;
+        }
+
+        .some-class {
+            width: 100px !important;
+            height: 100px !important;
+            border-radius: 0;
+            line-height: 100px !important;
+            font-size: 40px;
+            font-weight: bold !important;
+            color: #666666 !important;
+            background: white !important;
+            border: dashed 1px #666666;
+        }
+
+        .radio, .checkbox {
+            padding-left: 0px !important;
+        }
+
+        .loadfile {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border: 1px dashed silver;
+            cursor: pointer;
+            color: #838383;
+            font-size: 44px;
+            line-height: calc(100px - 9px);
+            text-align: center;
+        }
+
+        .panel-default > .panel-heading {
+            background-color: #f5f5f5 !important;
+        }
+
+        .error {
+            color: red;
+            padding: 0 10px;
+        }
+
+        .ms-drop {
+            position: initial !important;
+        }
+
+        #l-map {
+            height: 500px;
+            width: auto;
+        }
+        .anchorBL{display:none;}
+
+    </style>
+</block>
+<block name="main">
+    <!-- page heading start-->
+    <div class="page-heading">
+        <h3>
+            明星招募
+        </h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">明星招募</a>
+            </li>
+            <li class="active"> 招募列表 </li>
+        </ul>
+    </div>
+    <section class="wrapper">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <div class="panel-body">
+                        <form action="" class="form-horizontal adminex-form" method="post" id="projectForm">
+
+                            <div class="tab-content">
+                                <!--项目基本信息-->
+                                <div class="form-group">
+                                   角色列表
+
+                                        <table class="table table-bordered table-hover">
+                                            <tr align="center">
+                                                <td>编号</td>
+                                                <td>电影名</td>
+                                                <td>封面</td>
+                                                <td>招募角色</td>
+                                                <td>创建时间</td>
+                                                <td>操作</td>
+                                            </tr>
+                                            <if condition="empty($films)">
+                                            <tr align="center">
+                                                <td colspan="6">暂无数据</td>
+                                            </tr>
+                                            </if>
+                                            <volist name="films" id="f">
+                                            <tr align="center">
+                                                <td style='vertical-align: middle'>{$f.id}</td>
+                                                <td style='vertical-align: middle'>{$f.name}</td>
+                                                <td style='vertical-align: middle'><img src="{$f['image_url']}" style="height: 50px;width: 30px"></td>
+                                                <td style='vertical-align: middle'>{$f['roles']}</td>
+                                                <td style='vertical-align: middle'>{:date('Y-m-d',$f['create_time'])}</td>
+                                                <td style='vertical-align: middle'><input type="button" name="delete" class="btn btn-xs btn-danger" data-id="{$f['id']}" value="删除"></td>
+                                            </tr>
+                                            </volist>
+                                        </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="js">
+    <!--<js href="__PUBLIC__/uploadify/jquery.uploadify.min.js"/>-->
+    <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/validate/dist/jquery.validate.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+    <script>
+$(function(){
+    $('#submit').click(function(){
+
+        //>> 获取用户添加的角色名
+        role = $('input[name = name]').val();
+        if(role == ''){
+            layer.tips('角色名不能为空','input[name = name]');
+            return false;
+        }
+
+        var url = location.protocol+'//'+window.location.host+'/admin/Role/save';
+        $.ajax({
+            'type':'post',
+            'dataType':'json',
+            'url':url,
+            'data':{
+                'role':role,
+            },
+            success:function(result){
+                console.log(result);
+                if(result.status == 1){
+                    layer.msg(result.msg);
+                }else{
+                    layer.msg(result.msg);
+                }
+            }
+        });
+    });
+
+    $('input[name = delete]').click(function(){
+
+        id = $(this).attr('data-id');
+        url = location.protocol+'//'+window.location.host+'/admin/Role/delRecruit';
+        $.ajax({
+            'type':'post',
+            'dataType':'json',
+            'url':url,
+            'data':{
+                'id':id
+            },
+            success:function(result){
+                if(result.status == 1){
+                    layer.msg(result.msg,function(){
+                        location.reload();
+                    });
+                }else{
+                    layer.msg(result.msg);
+                }
+            }
+        });
+    });
+});
+    </script>
+
+</block>

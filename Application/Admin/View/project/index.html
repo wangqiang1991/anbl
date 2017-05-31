@@ -1,0 +1,344 @@
+<extend name="public:tpl" />
+        <!-- header section end-->
+<block name="main">
+    <div class="page-heading">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:U('admin/index/index')}">后台首页</a>
+            </li>
+            <li class="active">
+                <a href="{:U('admin/project/index')}">电影管理</a>
+            </li>
+            <li class="active"> 电影列表 </li>
+        </ul>
+    </div>
+    <!-- page heading end-->
+
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        电影列表
+                            <span class="tools pull-right">
+                                <a href="{:U('admin/project/add')}" class="btn btn-success btn-link">新增电影</a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+
+                        <!--搜索开始-->
+                        <form class="form-inline" action="{:U('admin/project/index')}" method="get">
+                            <div class="form-group">
+                                <label>项目名称</label>
+                                <input type="text" class="form-control" name="name" value="{:I('get.name')}" placeholder="请输入项目名称">
+                            </div>
+                            <div class="form-group">
+                                <select name="type_id" class="form-control">
+                                    <option value="">--项目分类--</option>
+                                    <volist name="types" id="tag" >
+                                    <option value="{$tag['id']}" <if condition="I('get.type_id') eq $tag['id']"> selected="selected"</if>>{$tag.name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">搜索</button>
+                            <a  data-toggle="modal" data-target="#myModal3" class="btn btn-danger btn-ls fBtn">手动反红</a>
+                            <a  data-toggle="modal" data-target="#myModal4" class="btn btn-danger btn-ls bBtn">手动返本金</a>
+                        </form>
+
+                        <!--搜索结束-->
+                        <hr/>
+                        <div class="adv-table text-center">
+                            <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">编号</th>
+                                    <th class="text-center">名称</th>
+                                    <th class="text-center">类型</th>
+                                    <th class="text-center">固定分红比例</th>
+                                    <th class="text-center">浮动分红比例</th>
+                                    <th class="text-center">项目图片</th>
+                                    <th class="text-center">目标金额</th>
+                                    <th class="text-center">已支持资金</th>
+                                    <th class="text-center">筹集状态</th>
+                                    <th class="text-center">支持人数</th>
+                                    <th class="text-center">启动时间</th>
+                                    <th class="text-center">结束时间</th>
+                                    <th class="text-center">是否上架</th>
+                                    <th class="text-center">自定义排序</th>
+                                    <th class="text-center">首页轮播</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <if condition="empty($rows)">
+                                    <tr>
+                                        <td colspan="16">暂无数据</td>
+                                    </tr>
+                                </if>
+                                <volist name="rows" id="tag">
+                                <tr class="gradeX">
+                                    <td style="vertical-align: middle">{$tag.id}</td>
+                                    <td style="vertical-align: middle">{$tag.name}</td>
+                                    <td style="vertical-align: middle">{$tag.type}</td>
+                                    <td style="vertical-align: middle">{$tag.fixed_rate}</td>
+                                    <td style="vertical-align: middle">{$tag.float_rate}</td>
+                                    <td style="vertical-align: middle"><image src="{$tag['image_url']}" style="width: 50px;height: 50px"></image></td>
+                                    <td style="vertical-align: middle">{$tag.target_amount}</td>
+                                    <td style="vertical-align: middle">{$tag.money}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_ok'] eq 1">成功<else />未成功</if></td>
+                                    <td style="vertical-align: middle">{$tag.support_number}</td>
+                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['start_time'])}</td>
+                                    <td style="vertical-align: middle">{:date('Y-m-d',$tag['end_time'])}</td>
+                                    <td style="vertical-align: middle"><if condition="$tag['is_active'] eq 1">
+                                        <a href="javascript:;" onclick="checkState('{:U('admin/project/state', array('id' => $tag['id']))}',this)"><span class="fa fa-check"></span></a>
+                                        <else/>
+                                        <a href="javascript:;" onclick="checkState('{:U('admin/project/state', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
+                                    </if></td>
+                                    <td style="vertical-align: middle">
+                                        <input class="form-control" style="width: 50px; display: inline-block; text-align: center;" type="text" value="{$tag['sort']}" onchange="saveSort('{:U('admin/Project/saveSort', array('id' => $tag['id']))}',this)" >
+                                    </td>
+                                    <td style="vertical-align: middle"><if condition="$tag['recommend'] eq 1">
+                                        <a href="javascript:;" onclick="checkRecommend('{:U('admin/project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-check"></span></a>
+                                        <else/>
+                                        <a href="javascript:;" onclick="checkRecommend('{:U('admin/project/recommend', array('id' => $tag['id']))}',this)"><span class="fa fa-times color-red"></span></a>
+                                    </if></td>
+                                    <td style="vertical-align: middle">
+                                        <a href="{:U('admin/dynamic/add', array('id' => $tag['id']))}" class="btn btn-xs btn-warning">增加动态</a>
+                                        <a href="{:U('admin/project/edit', array('id' => $tag['id']))}" class="btn btn-xs btn-success">编辑</a>
+                                        <a data-href="{:U('admin/project/remove', array('id' => $tag['id']))}" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs deleteBtn">删除</a>
+                                        <input type="button" class="btn btn-xs btn-info" data-id="{$tag.id}" data-rate-2="{$tag.float_rate}" data-rate-1="{$tag.fixed_rate}" value="分红比例" name="rate">
+
+                                        <if condition="$tag['is_fh'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已返还</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal1" class="btn btn-danger btn-xs fhBtn">票房分红</a></if>
+
+                                        <if condition="$tag['is_fy'] eq 1"><a href="javascript:;" class="btn btn-xs btn-inverse">已分佣</a><else /><a data-id="{$tag['id']}" data-toggle="modal" data-target="#myModal2" class="btn btn-info btn-xs fyBtn">票房分佣</a></if>
+                                    </td>
+                                </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                            {$pages}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- Modal1 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">提示：Notice!</h4>
+                </div>
+                <div class="modal-body">
+                    你确认要删除吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a href="" id="deleteTrue" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal1 -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel1">提示：Notice!</h4>
+                </div>
+                <div class="modal-body">
+                    你确认要立即浮动分红吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a data-id="" id="fhTrue" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal1 -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2">提示：Notice!</h4>
+                </div>
+                <div class="modal-body">
+                    你确认要立即分佣吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a data-id="" id="fyTrue" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel3">提示：Notice!</h4>
+                </div>
+                <div class="modal-body">
+                    你确认要手动返红吗？分红系统会自动进行，手动返回可能会影响分红一天多次触发。
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a data-id="" id="fTrue" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel4">提示：Notice!</h4>
+                </div>
+                <div class="modal-body">
+                    你确认要手动返还本金吗？系统会自动进行，手动返回可能会影响返还本金一天多次触发。
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a data-id="" id="bTrue" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="__PUBLIC__/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/layer/layer.js" type="text/javascript"></script>
+    <script>
+        $(function(){
+            $('.deleteBtn').click(function(){
+                var _link = $(this).attr('data-href');
+                $('#deleteTrue').attr('href', _link);
+            })
+        });
+
+        //立即分红
+        $(function(){
+            $('.fhBtn').click(function(){
+                var _id = $(this).attr('data-id');
+                $('#fhTrue').attr('data-id',_id);
+            });
+            $('#fhTrue').click(function(){
+                var _id = $(this).attr('data-id');
+                $.post("{:U('admin/money/index')}",{id:_id},function (data) {
+                    if(data.status == 0){
+                        layer.msg(data.msg);
+                    }else{
+                        layer.msg(data.msg);
+                       // window.location.href = "{:U('admin/order/supportOrder')}";
+                    }
+                });
+            })
+        });
+
+        // 手动分红
+        $('#fTrue').click(function(){
+            var _id = $(this).attr('data-id');
+            $.post("{:U('admin/money/test')}",function (data) {
+                if(data.status == 0){
+                    layer.msg(data.msg);
+                }else{
+                    layer.msg(data.msg);
+                    window.location.href = "{:U('admin/order/supportOrder')}";
+                }
+            });
+        });
+        $('#bTrue').click(function(){
+            $.post("{:U('admin/money/benjin')}",function (data) {
+                if(data.status == 0){
+                    layer.msg(data.msg);
+                }else{
+                    layer.msg(data.msg);
+                    window.location.href = "{:U('admin/order/supportOrder')}";
+                }
+            });
+        });
+
+        //立即分佣
+        $(function(){
+            $('.fyBtn').click(function(){
+                var _id = $(this).attr('data-id');
+                $('#fyTrue').attr('data-id',_id);
+            });
+            $('#fyTrue').click(function(){
+                var _id = $(this).attr('data-id');
+                $.post("{:U('admin/money/fy')}",{id:_id},function (data) {
+                    if(data.status == 0){
+                        layer.msg(data.msg);
+                    }else{
+                        layer.msg(data.msg);
+                       // window.location.href = "{:U('admin/order/supportOrder')}";
+                    }
+                });
+            })
+        });
+
+
+        function checkState(url,e) {
+            $.get(url,function (data) {
+                if(data.status == 1){
+                    if(data.value == 1){
+                        $(e).html('<span class="fa fa-check"></span>');
+                    }else{
+                        $(e).html('<span class="fa fa-times color-red"></span>');
+                    }
+                }
+                layer.msg(data.msg);
+            });
+        }
+
+        function checkRecommend(url,e) {
+            $.get(url,function (data) {
+                if(data.status == 1){
+                    if(data.value == 1){
+                        $(e).html('<span class="fa fa-check"></span>');
+                    }else{
+                        $(e).html('<span class="fa fa-times color-red"></span>');
+                    }
+                }
+                layer.msg(data.msg);
+            });
+        }
+
+        function saveSort(url,e) {
+            $.post(url,{sort:$(e).val()},function (data) {
+                if(data.status == 1){
+                    $(e).val(data.value);
+                }
+                layer.msg(data.msg);
+            });
+        }
+
+        $('body').on('click','input[name = rate]',function(){
+            float_rate = $(this).attr('data-rate-2');
+            fixed_rate = $(this).attr('data-rate-1');
+            id = $(this).attr('data-id');
+            layer.open({
+                type: 2,
+                title: '分红比例设置',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['50%', '50%'],
+                content: "{:U('admin/project/rate')}?"+'id='+id,
+                end: function () {
+                    location.reload();
+                }
+            });
+        });
+
+
+    </script>
+</block>

@@ -1,0 +1,100 @@
+<extend name="public:tpl" />
+<block name="main">
+    <!-- header section end-->
+
+    <!-- page heading start-->
+    <div class="page-heading">
+        <h3>
+            管理首页
+        </h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:U('Index/index')}">管理后台</a>
+            </li>
+            <li class="active"> 管理首页 </li>
+        </ul>
+    </div>
+    <!-- page heading end-->
+
+    <!--body wrapper start-->
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-md-6">
+                <!--statistics start-->
+                <div class="row state-overview">
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <div class="panel purple">
+                            <div class="symbol">
+                                <i class="fa fa-gavel"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="value">{$projectNum}</div>
+                                <div class="title">项目数量</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <div class="panel red">
+                            <div class="symbol">
+                                <i class="fa fa-tags"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="value">{$userNum}</div>
+                                <div class="title">会员数量</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row state-overview">
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <div class="panel blue">
+                            <div class="symbol">
+                                <i class="fa fa-money"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="value"> {$projectNewNum}</div>
+                                <div class="title">本月会员支持总额</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <div class="panel green">
+                            <div class="symbol">
+                                <i class="fa fa-eye"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="value"></div>
+                                <div class="title"> 本月会员充值总额</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--statistics end-->
+            </div>
+            <div class="col-md-6">
+                <!--more statistics box start-->
+                <!--<div class="panel deep-purple-box">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-7 col-sm-7 col-xs-7">
+                                <div id="graph-donut" class="revenue-graph"></div>
+
+                            </div>
+                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                <ul class="bar-legend">
+                                    <li><span class="blue"></span> Open rate</li>
+                                    <li><span class="green"></span> Click rate</li>
+                                    <li><span class="purple"></span> Share rate</li>
+                                    <li><span class="red"></span> Unsubscribed rate</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <!--more statistics box end-->
+            </div>
+        </div>
+
+    </div>
+
+</block>
